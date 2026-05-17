@@ -1,0 +1,105 @@
+$color-primary: #ff6b6b;
+$color-primary-light: #ff5252;
+$color-primary-dark: #ee5a52;
+
+$color-secondary: #667eea;
+$color-accent-secondary: #764ba2;
+$color-secondary-dark: #5568d3;
+
+$color-category: #4caf50;
+$color-category-light: #8bc34a;
+$color-category-dark: #45a049;
+$color-category-bg: #e8f5e9;
+$color-category-text: #2e7d32;
+
+$color-dislike: #f44336;
+$color-dislike-dark: #e91e63;
+$color-dislike-bg: #ffebee;
+
+$color-admin: #ffd700;
+$color-admin-light: #ffed4e;
+$color-admin-dark: #ffc700;
+$color-admin-text: #744210;
+
+$color-text-primary: #333333;
+$color-text-secondary: #555555;
+$color-text-tertiary: #666666;
+$color-text-muted: #888888;
+$color-text-disabled: #999999;
+
+$color-contrast-high: #ffffff;
+
+$color-bg-primary: $color-contrast-high;
+$color-bg-secondary: #f8f9fa;
+$color-neutral-divider: #f0f0f0;
+$color-bg-light: #f5f7fa;
+$color-bg-overlay: #e9ecef;
+
+$color-border-primary: #e0e0e0;
+$color-border-light: #e2e8f0;
+$color-border-muted: #ddd;
+$color-accent-subtle: #c3cfe2;
+
+$shadow-sm: rgba(0, 0, 0, 0.1);
+$shadow-md: rgba(0, 0, 0, 0.15);
+$shadow-lg: rgba(0, 0, 0, 0.3);
+
+$shadow-primary: rgba(255, 107, 107, 0.1);
+$shadow-primary-md: rgba(255, 107, 107, 0.3);
+$shadow-primary-lg: rgba(255, 107, 107, 0.4);
+
+$shadow-secondary: rgba(102, 126, 234, 0.1);
+$shadow-secondary-md: rgba(102, 126, 234, 0.3);
+
+$overlay-dark: rgba(0, 0, 0, 0.7);
+$overlay-light: rgba(0, 0, 0, 0.05);
+
+$gradient-secondary: linear-gradient(
+  135deg,
+  $color-secondary 0%,
+  $color-accent-secondary 100%
+);
+
+$gradient-accent: linear-gradient(
+  135deg,
+  $color-primary 0%,
+  $color-primary-dark 100%
+);
+
+$gradient-category: linear-gradient(
+  135deg,
+  $color-category 0%,
+  $color-category-light 100%
+);
+
+$gradient-admin: linear-gradient(
+  135deg,
+  $color-admin 0%,
+  $color-admin-light 100%
+);
+
+$gradient-dislike: linear-gradient(
+  135deg,
+  $color-dislike 0%,
+  $color-dislike-dark 100%
+);
+
+$gradient-bg-subtle: linear-gradient(
+  135deg,
+  $color-bg-light 0%,
+  $color-accent-subtle 100%
+);
+
+$gradient-bg-overlay: linear-gradient(
+  135deg,
+  $color-bg-secondary 0%,
+  $color-bg-overlay 100%
+);
+
+$gradient-info-bg: linear-gradient(
+  135deg,
+  rgba($color-secondary, 0.09) 0%,
+  rgba($color-accent-secondary, 0.09) 100%
+);
+
+$input-placeholder: #cbd5e0;
