@@ -1,0 +1,32 @@
+@use "../../../assets/styles/colors";
+
+.icon-button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:focus-visible {
+    outline: 2px solid colors.$color-secondary-dark;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+
+    &--medium {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

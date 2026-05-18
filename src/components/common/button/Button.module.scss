@@ -1,0 +1,180 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+@use "../../../assets/styles/extends" as *;
+
+.button {
+  @extend %button;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  @media (max-width: variables.$bp-mobile) {
+    width: auto;
+    padding: 0 0.75rem;
+  }
+
+  &--large {
+    padding: 16px 0;
+
+    @media (max-width: variables.$bp-tablet) {
+      padding: 12px 0;
+    }
+
+    @media (max-width: variables.$bp-mobile) {
+      padding: 10px 0.75rem;
+    }
+  }
+
+  &--medium {
+    padding: 12px 0;
+
+    @media (max-width: variables.$bp-tablet) {
+      padding: 10px 0;
+    }
+
+    @media (max-width: variables.$bp-mobile) {
+      padding: 8px 0.75rem;
+    }
+  }
+
+  &--small {
+    padding: 8px 0;
+
+    @media (max-width: variables.$bp-mobile) {
+      padding: 6px 0.5rem;
+    }
+  }
+
+  &--primary {
+    font-weight: variables.$font-medium;
+    background-color: colors.$color-primary;
+    color: colors.$color-contrast-high;
+    border: none;
+
+    &:hover:not(:disabled),
+    &:focus-visible {
+      background-color: colors.$color-primary-light;
+    }
+
+    &:active:not(:disabled) {
+      background-color: colors.$color-primary-dark;
+    }
+
+    &:disabled {
+      background-color: colors.$color-text-muted;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  &--secondary {
+    font-weight: variables.$font-medium;
+    background-color: colors.$color-secondary;
+    color: colors.$color-contrast-high;
+    border: none;
+
+    &:hover:not(:disabled),
+    &:focus-visible {
+      background-color: colors.$color-secondary-dark;
+    }
+
+    &:active:not(:disabled) {
+      background-color: colors.$color-accent-secondary;
+    }
+
+    &:disabled {
+      background-color: colors.$color-text-muted;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  &--success {
+    font-weight: variables.$font-medium;
+    background-color: colors.$color-category;
+    color: colors.$color-contrast-high;
+    border: none;
+
+    &:hover:not(:disabled),
+    &:focus-visible {
+      background-color: colors.$color-category-dark;
+    }
+
+    &:active:not(:disabled) {
+      background-color: colors.$color-category-dark;
+    }
+
+    &:disabled {
+      background-color: colors.$color-text-muted;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  &--danger {
+    font-weight: variables.$font-medium;
+    background-color: colors.$color-dislike;
+    color: colors.$color-contrast-high;
+    border: none;
+
+    &:hover:not(:disabled),
+    &:focus-visible {
+      background-color: colors.$color-dislike-dark;
+    }
+
+    &:active:not(:disabled) {
+      background-color: colors.$color-dislike-dark;
+    }
+
+    &:disabled {
+      background-color: colors.$color-text-muted;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  &--outline {
+    font-weight: variables.$font-medium;
+    color: colors.$color-text-primary;
+    background-color: transparent;
+
+    &:hover:not(:disabled),
+    &:focus-visible {
+      background-color: colors.$color-bg-secondary;
+      border-color: colors.$color-border-primary;
+    }
+
+    &:active:not(:disabled) {
+      background-color: colors.$color-neutral-divider;
+    }
+
+    &:disabled {
+      color: colors.$color-text-disabled;
+      border-color: colors.$color-border-muted;
+      cursor: not-allowed;
+    }
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    align-self: center;
+    margin-right: 10px;
+  }
+
+  &--capitalize {
+    text-transform: capitalize;
+  }
+
+  &--uppercase {
+    text-transform: uppercase;
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}

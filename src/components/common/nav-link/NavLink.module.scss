@@ -1,0 +1,59 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+.nav {
+  &__link {
+    padding: 0.75rem 1rem;
+    color: colors.$color-text-secondary;
+    text-decoration: none;
+    font-weight: variables.$font-medium;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+
+    &:hover {
+      color: colors.$color-primary;
+      background: colors.$color-bg-secondary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid colors.$color-secondary-dark;
+      outline-offset: 2px;
+    }
+
+    &--active {
+      color: colors.$color-primary;
+      font-weight: variables.$font-bold;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -0.25rem;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: colors.$color-primary;
+        border-radius: 2px;
+      }
+    }
+
+    @media (max-width: variables.$bp-tablet) {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: variables.$bp-mobile) {
+      padding: 0.375rem 0.5rem;
+      font-size: 0.8rem;
+      border-radius: 4px;
+
+      &--active::after {
+        height: 2px;
+        bottom: -0.125rem;
+      }
+    }
+  }
+}

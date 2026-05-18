@@ -1,0 +1,78 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 1 350px;
+  background: colors.$color-bg-secondary;
+  border: 1px solid colors.$color-border-light;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: all 0.2s ease;
+
+  &:focus-within {
+    border-color: colors.$color-secondary;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: colors.$color-contrast-high;
+  }
+
+  @media (max-width: variables.$bp-tablet) {
+    flex: 1 1 100%;
+    order: 2;
+    min-width: 100%;
+  }
+
+  @media (max-width: variables.$bp-mobile) {
+    flex: 1 1 100%;
+    order: 2;
+    min-width: 100%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    gap: 0.25rem;
+  }
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-family: variables.$font-family;
+  font-size: 1rem;
+  color: colors.$color-text-primary;
+  outline: none;
+
+  &::placeholder {
+    color: colors.$color-text-muted;
+    font-weight: variables.$font-regular;
+  }
+
+  // Reset browser default styles
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button {
+    display: none;
+  }
+
+  @media (max-width: variables.$bp-mobile) {
+    font-size: 0.9rem;
+  }
+}
+
+// Icon button styling within search
+.search button {
+  flex-shrink: 0;
+  padding: 0.25rem;
+  color: colors.$color-text-muted;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: colors.$color-secondary;
+  }
+
+  &:focus-visible {
+    outline: 2px solid colors.$color-secondary-dark;
+    outline-offset: 2px;
+  }
+}
