@@ -1,0 +1,82 @@
+{
+  "accounts": [
+    {
+      "id": "u1",
+      "email": "admin@recipeapp.com",
+      "password": "admin123",
+      "name": "Admin",
+      "role": "admin"
+    },
+    {
+      "id": "u2",
+      "email": "maria@recipeapp.com",
+      "password": "maria123",
+      "name": "Maria",
+      "role": "user"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "u1",
+      "name": "Admin",
+      "email": "admin@recipeapp.com",
+      "preferences": {
+        "favoriteTags": ["italian", "quick", "dinner"],
+        "dietaryRestrictions": [],
+        "dislikedIngredients": []
+      },
+      "viewHistory": ["r1", "r2", "r3", "r7", "r9"],
+      "collections": [
+        {
+          "id": "col1",
+          "name": "Favorites",
+          "recipeIds": ["r2", "r7"],
+          "isDefault": true
+        },
+        {
+          "id": "col2",
+          "name": "Want to Try",
+          "recipeIds": [],
+          "isDefault": true
+        },
+        {
+          "id": "col3",
+          "name": "Cooking History",
+          "recipeIds": [],
+          "isDefault": true
+        }
+      ]
+    },
+    {
+      "id": "u2",
+      "name": "Maria",
+      "email": "maria@recipeapp.com",
+      "preferences": {
+        "favoriteTags": ["healthy", "quick", "vegetarian", "vegan"],
+        "dietaryRestrictions": ["vegetarian"],
+        "dislikedIngredients": ["mushrooms"]
+      },
+      "viewHistory": ["r1", "r2", "r3", "r4", "r5", "r8"],
+      "collections": [
+        {
+          "id": "col4",
+          "name": "Favorites",
+          "recipeIds": ["r1", "r4", "r8"],
+          "isDefault": true
+        },
+        {
+          "id": "col5",
+          "name": "Want to Try",
+          "recipeIds": ["r12", "r11"],
+          "isDefault": true
+        },
+        {
+          "id": "col6",
+          "name": "Cooking History",
+          "recipeIds": [],
+          "isDefault": true
+        }
+      ]
+    }
+  ]
+}

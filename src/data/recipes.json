@@ -1,0 +1,587 @@
+[
+  {
+    "id": "r1",
+    "title": "Classic Borscht",
+    "description": "A rich, hearty Eastern European beet soup with a deep ruby color. This traditional recipe combines tender vegetables, a savory broth, and a dollop of sour cream for a warming, satisfying meal.",
+    "ingredients": [
+      { "name": "beets", "amount": 3, "unit": "medium" },
+      { "name": "cabbage", "amount": 300, "unit": "g" },
+      { "name": "potatoes", "amount": 3, "unit": "medium" },
+      { "name": "carrots", "amount": 2, "unit": "medium" },
+      { "name": "onion", "amount": 1, "unit": "large" },
+      { "name": "tomato paste", "amount": 2, "unit": "tbsp" },
+      { "name": "beef broth", "amount": 2, "unit": "L" },
+      { "name": "garlic", "amount": 3, "unit": "cloves" },
+      { "name": "sour cream", "amount": 4, "unit": "tbsp" },
+      { "name": "dill", "amount": 1, "unit": "handful" },
+      { "name": "sunflower oil", "amount": 2, "unit": "tbsp" },
+      { "name": "salt and pepper", "amount": 1, "unit": "to taste" }
+    ],
+    "steps": [
+      {
+        "text": "Peel and grate beets; sauté in oil with a splash of vinegar.",
+        "timer": 15
+      },
+      {
+        "text": "Dice onion and carrots; sauté in a separate pan until golden.",
+        "timer": 8
+      },
+      {
+        "text": "Add tomato paste to the onion-carrot mixture and cook 2 minutes.",
+        "timer": 2
+      },
+      {
+        "text": "Bring beef broth to a boil; add diced potatoes and cook.",
+        "timer": 10
+      },
+      {
+        "text": "Add shredded cabbage and cook another 10 minutes.",
+        "timer": 10
+      },
+      {
+        "text": "Add beets and the onion-carrot mixture; simmer.",
+        "timer": 15
+      },
+      { "text": "Crush garlic and stir in; season with salt and pepper." },
+      { "text": "Serve hot topped with sour cream and fresh dill." }
+    ],
+    "nutrition": { "calories": 180, "protein": 6, "carbs": 28, "fat": 5 },
+    "tags": ["soup", "traditional", "vegetarian", "lunch", "hearty"],
+    "diet": ["vegetarian"],
+    "rating": { "value": 4.8, "count": 1 },
+    "imageUrl": "https://images.unsplash.com/photo-1547592180-85f173990554?w=600",
+    "cookingTime": 90,
+    "servings": 6,
+    "difficulty": "medium",
+    "createdBy": "u1",
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "r2",
+    "title": "Spaghetti Carbonara",
+    "description": "An authentic Roman pasta dish made with eggs, Pecorino Romano, guanciale, and black pepper. Creamy without any cream — just the magic of emulsified eggs and pasta water.",
+    "ingredients": [
+      { "name": "spaghetti", "amount": 400, "unit": "g" },
+      { "name": "guanciale or pancetta", "amount": 150, "unit": "g" },
+      { "name": "eggs", "amount": 4, "unit": "large" },
+      { "name": "Pecorino Romano", "amount": 100, "unit": "g" },
+      { "name": "Parmesan", "amount": 50, "unit": "g" },
+      { "name": "black pepper", "amount": 2, "unit": "tsp" },
+      { "name": "salt", "amount": 1, "unit": "to taste" }
+    ],
+    "steps": [
+      {
+        "text": "Cook spaghetti in heavily salted boiling water until al dente; reserve 1 cup pasta water.",
+        "timer": 10
+      },
+      {
+        "text": "Dice guanciale and fry in a dry pan over medium heat until crispy; remove from heat.",
+        "timer": 8
+      },
+      {
+        "text": "Whisk eggs with finely grated Pecorino and Parmesan; season generously with black pepper."
+      },
+      {
+        "text": "Drain pasta and add directly to the guanciale pan (off heat)."
+      },
+      {
+        "text": "Pour egg mixture over pasta, tossing quickly while adding pasta water splash by splash.",
+        "timer": 2
+      },
+      {
+        "text": "Toss vigorously until sauce is creamy and coats every strand."
+      },
+      { "text": "Serve immediately with extra cheese and black pepper." }
+    ],
+    "nutrition": { "calories": 520, "protein": 24, "carbs": 60, "fat": 20 },
+    "tags": ["pasta", "italian", "quick", "dinner", "classic"],
+    "rating": { "value": 4.7, "count": 0 },
+    "imageUrl": "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=600",
+    "cookingTime": 25,
+    "servings": 4,
+    "difficulty": "medium",
+    "createdBy": "u1",
+    "createdAt": "2026-01-02T00:00:00.000Z",
+    "updatedAt": "2026-01-02T00:00:00.000Z"
+  },
+  {
+    "id": "r3",
+    "title": "Greek Salad",
+    "description": "A fresh, vibrant Mediterranean salad with crisp cucumbers, juicy tomatoes, creamy feta, and briny Kalamata olives dressed in olive oil and oregano. Ready in minutes.",
+    "ingredients": [
+      { "name": "tomatoes", "amount": 4, "unit": "medium" },
+      { "name": "cucumber", "amount": 1, "unit": "large" },
+      { "name": "red onion", "amount": 1, "unit": "small" },
+      { "name": "feta cheese", "amount": 200, "unit": "g" },
+      { "name": "Kalamata olives", "amount": 100, "unit": "g" },
+      { "name": "green bell pepper", "amount": 1, "unit": "medium" },
+      { "name": "olive oil", "amount": 3, "unit": "tbsp" },
+      { "name": "dried oregano", "amount": 1, "unit": "tsp" },
+      { "name": "salt and pepper", "amount": 1, "unit": "to taste" }
+    ],
+    "steps": [
+      {
+        "text": "Cut tomatoes into wedges and cucumber into thick half-moons."
+      },
+      {
+        "text": "Slice red onion into thin rings; slice green pepper into strips."
+      },
+      { "text": "Combine vegetables in a large bowl with olives." },
+      { "text": "Place feta on top in a large chunk or crumble." },
+      {
+        "text": "Drizzle generously with olive oil; sprinkle with oregano, salt, and pepper."
+      },
+      { "text": "Toss lightly just before serving." }
+    ],
+    "nutrition": { "calories": 220, "protein": 8, "carbs": 12, "fat": 16 },
+    "tags": [
+      "salad",
+      "greek",
+      "mediterranean",
+      "vegetarian",
+      "quick",
+      "healthy"
+    ],
+    "diet": ["vegetarian", "gluten-free"],
+    "rating": { "value": 4.5, "count": 0 },
+    "imageUrl": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600",
+    "cookingTime": 10,
+    "servings": 4,
+    "difficulty": "easy",
+    "createdBy": "u1",
+    "createdAt": "2026-01-03T00:00:00.000Z",
+    "updatedAt": "2026-01-03T00:00:00.000Z"
+  },
+  {
+    "id": "r4",
+    "title": "Chicken Teriyaki",
+    "description": "Tender chicken thighs glazed in a sweet-savory homemade teriyaki sauce. A Japanese-inspired weeknight favorite that comes together in under 30 minutes.",
+    "ingredients": [
+      { "name": "chicken thighs", "amount": 600, "unit": "g" },
+      { "name": "soy sauce", "amount": 4, "unit": "tbsp" },
+      { "name": "mirin", "amount": 3, "unit": "tbsp" },
+      { "name": "sake", "amount": 2, "unit": "tbsp" },
+      { "name": "sugar", "amount": 2, "unit": "tbsp" },
+      { "name": "garlic", "amount": 2, "unit": "cloves" },
+      { "name": "ginger", "amount": 1, "unit": "tsp" },
+      { "name": "sesame oil", "amount": 1, "unit": "tsp" },
+      { "name": "sesame seeds", "amount": 1, "unit": "tbsp" },
+      { "name": "green onions", "amount": 2, "unit": "stalks" }
+    ],
+    "steps": [
+      {
+        "text": "Combine soy sauce, mirin, sake, sugar, garlic, and ginger to make the teriyaki sauce."
+      },
+      {
+        "text": "Marinate chicken in half the sauce for 15 minutes.",
+        "timer": 15
+      },
+      {
+        "text": "Heat a skillet over medium-high heat; cook chicken skin-side down until golden.",
+        "timer": 6
+      },
+      { "text": "Flip chicken and cook another 5 minutes.", "timer": 5 },
+      {
+        "text": "Pour remaining sauce over chicken; cook until glazed and sticky.",
+        "timer": 2
+      },
+      { "text": "Slice and garnish with sesame seeds and green onions." },
+      { "text": "Serve with steamed rice." }
+    ],
+    "nutrition": { "calories": 380, "protein": 32, "carbs": 22, "fat": 18 },
+    "tags": ["chicken", "japanese", "asian", "quick", "dinner", "gluten-free"],
+    "diet": ["gluten-free"],
+    "rating": { "value": 4.6, "count": 0 },
+    "imageUrl": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600",
+    "cookingTime": 30,
+    "servings": 4,
+    "difficulty": "easy",
+    "createdBy": "u1",
+    "createdAt": "2026-01-04T00:00:00.000Z",
+    "updatedAt": "2026-01-04T00:00:00.000Z"
+  },
+  {
+    "id": "r5",
+    "title": "Fluffy Pancakes",
+    "description": "Light-as-air American-style pancakes with a golden crust and pillowy interior. Perfect for a lazy weekend breakfast with maple syrup and fresh berries.",
+    "ingredients": [
+      { "name": "all-purpose flour", "amount": 200, "unit": "g" },
+      { "name": "milk", "amount": 250, "unit": "ml" },
+      { "name": "eggs", "amount": 2, "unit": "large" },
+      { "name": "butter", "amount": 2, "unit": "tbsp" },
+      { "name": "baking powder", "amount": 2, "unit": "tsp" },
+      { "name": "sugar", "amount": 2, "unit": "tbsp" },
+      { "name": "salt", "amount": 1, "unit": "pinch" },
+      { "name": "vanilla extract", "amount": 1, "unit": "tsp" },
+      { "name": "maple syrup", "amount": 4, "unit": "tbsp" }
+    ],
+    "steps": [
+      {
+        "text": "Whisk together flour, baking powder, sugar, and salt in a bowl."
+      },
+      {
+        "text": "In another bowl whisk eggs, milk, melted butter, and vanilla."
+      },
+      {
+        "text": "Pour wet ingredients into dry ingredients; stir until just combined — lumps are fine."
+      },
+      {
+        "text": "Rest batter 5 minutes while heating a non-stick pan over medium-low heat.",
+        "timer": 5
+      },
+      { "text": "Lightly butter the pan; pour ¼ cup batter per pancake." },
+      {
+        "text": "Cook until bubbles form and edges look set; flip and cook 1 minute more.",
+        "timer": 3
+      },
+      { "text": "Serve with maple syrup and fresh berries." }
+    ],
+    "nutrition": { "calories": 280, "protein": 8, "carbs": 42, "fat": 9 },
+    "tags": ["breakfast", "american", "sweet", "quick", "vegetarian"],
+    "diet": ["vegetarian"],
+    "rating": { "value": 4.5, "count": 0 },
+    "imageUrl": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600",
+    "cookingTime": 20,
+    "servings": 4,
+    "difficulty": "easy",
+    "createdBy": "u1",
+    "createdAt": "2026-01-05T00:00:00.000Z",
+    "updatedAt": "2026-01-05T00:00:00.000Z"
+  },
+  {
+    "id": "r6",
+    "title": "Keto Avocado Bowl",
+    "description": "A nutrient-dense, low-carb bowl built on creamy avocado with grilled salmon, leafy greens, cucumber, and a lemon-herb dressing. A complete meal that keeps you full for hours.",
+    "ingredients": [
+      { "name": "avocado", "amount": 2, "unit": "ripe" },
+      { "name": "salmon fillet", "amount": 200, "unit": "g" },
+      { "name": "mixed greens", "amount": 100, "unit": "g" },
+      { "name": "cucumber", "amount": 0.5, "unit": "medium" },
+      { "name": "cherry tomatoes", "amount": 100, "unit": "g" },
+      { "name": "lemon juice", "amount": 2, "unit": "tbsp" },
+      { "name": "olive oil", "amount": 2, "unit": "tbsp" },
+      { "name": "fresh dill", "amount": 1, "unit": "small bunch" },
+      { "name": "salt and pepper", "amount": 1, "unit": "to taste" }
+    ],
+    "steps": [
+      {
+        "text": "Season salmon with salt, pepper, and lemon juice; grill or pan-fry.",
+        "timer": 8
+      },
+      { "text": "Halve avocados; remove pit and scoop flesh into slices." },
+      {
+        "text": "Arrange mixed greens in a bowl; add cucumber slices and halved cherry tomatoes."
+      },
+      { "text": "Place salmon and avocado over the greens." },
+      { "text": "Drizzle with olive oil and remaining lemon juice." },
+      { "text": "Scatter fresh dill and season to taste." }
+    ],
+    "nutrition": { "calories": 420, "protein": 28, "carbs": 8, "fat": 32 },
+    "tags": [
+      "keto",
+      "healthy",
+      "salad",
+      "lunch",
+      "gluten-free",
+      "high-protein"
+    ],
+    "diet": ["keto", "gluten-free"],
+    "rating": { "value": 4.4, "count": 0 },
+    "imageUrl": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
+    "cookingTime": 15,
+    "servings": 2,
+    "difficulty": "easy",
+    "createdBy": "u1",
+    "createdAt": "2026-01-06T00:00:00.000Z",
+    "updatedAt": "2026-01-06T00:00:00.000Z"
+  },
+  {
+    "id": "r7",
+    "title": "Classic Tiramisu",
+    "description": "The iconic Italian dessert with espresso-soaked ladyfingers and a cloud of mascarpone cream dusted with cocoa. No baking required — just patience while it sets overnight.",
+    "ingredients": [
+      { "name": "ladyfinger biscuits", "amount": 200, "unit": "g" },
+      { "name": "mascarpone cheese", "amount": 500, "unit": "g" },
+      { "name": "eggs", "amount": 4, "unit": "large" },
+      { "name": "sugar", "amount": 100, "unit": "g" },
+      { "name": "espresso", "amount": 300, "unit": "ml" },
+      { "name": "coffee liqueur", "amount": 3, "unit": "tbsp" },
+      { "name": "cocoa powder", "amount": 2, "unit": "tbsp" }
+    ],
+    "steps": [
+      { "text": "Beat egg yolks with sugar until pale and thick.", "timer": 5 },
+      { "text": "Fold mascarpone into the yolk mixture until smooth." },
+      {
+        "text": "Whip egg whites to stiff peaks; gently fold into mascarpone mixture."
+      },
+      { "text": "Mix espresso with coffee liqueur in a shallow dish." },
+      {
+        "text": "Quickly dip ladyfingers in espresso (1 second per side) and layer in a dish."
+      },
+      { "text": "Spread half the mascarpone cream over the ladyfingers." },
+      {
+        "text": "Repeat with another layer of soaked ladyfingers and remaining cream."
+      },
+      {
+        "text": "Refrigerate at least 4 hours (overnight is best).",
+        "timer": 240
+      },
+      { "text": "Dust generously with cocoa powder before serving." }
+    ],
+    "nutrition": { "calories": 380, "protein": 9, "carbs": 36, "fat": 22 },
+    "tags": ["dessert", "italian", "no-bake", "classic", "make-ahead"],
+    "diet": ["vegetarian"],
+    "rating": { "value": 4.9, "count": 1 },
+    "imageUrl": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600",
+    "cookingTime": 30,
+    "servings": 8,
+    "difficulty": "medium",
+    "createdBy": "u1",
+    "createdAt": "2026-01-07T00:00:00.000Z",
+    "updatedAt": "2026-01-07T00:00:00.000Z"
+  },
+  {
+    "id": "r8",
+    "title": "Smoothie Bowl",
+    "description": "A thick, vibrant acai-mango smoothie bowl packed with antioxidants and topped with granola, fresh fruit, and seeds. A beautiful, nutritious breakfast that takes 10 minutes.",
+    "ingredients": [
+      { "name": "frozen acai puree", "amount": 100, "unit": "g" },
+      { "name": "frozen mango", "amount": 150, "unit": "g" },
+      { "name": "banana", "amount": 1, "unit": "medium" },
+      { "name": "almond milk", "amount": 100, "unit": "ml" },
+      { "name": "granola", "amount": 4, "unit": "tbsp" },
+      { "name": "fresh strawberries", "amount": 1, "unit": "handful" },
+      { "name": "kiwi", "amount": 1, "unit": "sliced" },
+      { "name": "chia seeds", "amount": 1, "unit": "tsp" },
+      { "name": "honey", "amount": 1, "unit": "tsp" }
+    ],
+    "steps": [
+      {
+        "text": "Blend frozen acai, mango, banana, and almond milk until thick and smooth.",
+        "timer": 1
+      },
+      {
+        "text": "Pour into a bowl — the mixture should be thick enough to hold toppings."
+      },
+      { "text": "Arrange granola, sliced strawberries, and kiwi on top." },
+      { "text": "Sprinkle chia seeds and drizzle with honey." }
+    ],
+    "nutrition": { "calories": 310, "protein": 6, "carbs": 58, "fat": 8 },
+    "tags": ["breakfast", "smoothie", "healthy", "vegan", "quick", "no-cook"],
+    "diet": ["vegan", "gluten-free"],
+    "rating": { "value": 4.3, "count": 0 },
+    "imageUrl": "https://images.unsplash.com/photo-1557800636-894a64c1696f?w=600",
+    "cookingTime": 10,
+    "servings": 1,
+    "difficulty": "easy",
+    "createdBy": "u1",
+    "createdAt": "2026-01-08T00:00:00.000Z",
+    "updatedAt": "2026-01-08T00:00:00.000Z"
+  },
+  {
+    "id": "r9",
+    "title": "Beef Burger",
+    "description": "A juicy smash-style beef burger with a crispy sear, melted cheddar, caramelized onions, and all the classic fixings. Better than anything from a fast-food chain.",
+    "ingredients": [
+      { "name": "ground beef (80/20)", "amount": 500, "unit": "g" },
+      { "name": "burger buns", "amount": 4, "unit": "pcs" },
+      { "name": "cheddar cheese", "amount": 4, "unit": "slices" },
+      { "name": "onion", "amount": 1, "unit": "large" },
+      { "name": "lettuce", "amount": 4, "unit": "leaves" },
+      { "name": "tomato", "amount": 2, "unit": "medium" },
+      { "name": "pickles", "amount": 1, "unit": "to taste" },
+      { "name": "burger sauce", "amount": 4, "unit": "tbsp" },
+      { "name": "salt and pepper", "amount": 1, "unit": "to taste" },
+      { "name": "butter", "amount": 1, "unit": "tbsp" }
+    ],
+    "steps": [
+      {
+        "text": "Slice onion; caramelize in butter over low heat.",
+        "timer": 20
+      },
+      {
+        "text": "Divide ground beef into 4 balls; season with salt and pepper."
+      },
+      {
+        "text": "Heat a cast-iron skillet until very hot; add beef balls and smash flat with a spatula."
+      },
+      {
+        "text": "Cook until edges are crispy; flip and immediately add cheese.",
+        "timer": 2
+      },
+      {
+        "text": "Cover for 1 minute to melt cheese; remove patties.",
+        "timer": 1
+      },
+      { "text": "Toast buns in the same pan." },
+      {
+        "text": "Assemble: sauce, lettuce, tomato, patty with cheese, caramelized onions, pickles."
+      }
+    ],
+    "nutrition": { "calories": 620, "protein": 38, "carbs": 40, "fat": 32 },
+    "tags": ["burger", "american", "dinner", "beef", "comfort-food"],
+    "rating": { "value": 4.7, "count": 0 },
+    "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600",
+    "cookingTime": 35,
+    "servings": 4,
+    "difficulty": "medium",
+    "createdBy": "u1",
+    "createdAt": "2026-01-09T00:00:00.000Z",
+    "updatedAt": "2026-01-09T00:00:00.000Z"
+  },
+  {
+    "id": "r10",
+    "title": "Chicken Dumplings (Vareniki)",
+    "description": "Homemade Ukrainian dumplings filled with seasoned ground chicken and onion, boiled until tender and served with butter and sour cream. A labor of love worth every minute.",
+    "ingredients": [
+      { "name": "all-purpose flour", "amount": 400, "unit": "g" },
+      { "name": "warm water", "amount": 200, "unit": "ml" },
+      { "name": "egg", "amount": 1, "unit": "large" },
+      { "name": "ground chicken", "amount": 400, "unit": "g" },
+      { "name": "onion", "amount": 1, "unit": "large" },
+      { "name": "garlic", "amount": 2, "unit": "cloves" },
+      { "name": "salt", "amount": 1, "unit": "tsp" },
+      { "name": "black pepper", "amount": 0.5, "unit": "tsp" },
+      { "name": "butter", "amount": 2, "unit": "tbsp" },
+      { "name": "sour cream", "amount": 4, "unit": "tbsp" }
+    ],
+    "steps": [
+      {
+        "text": "Mix flour, egg, water, and salt into a smooth dough; rest covered.",
+        "timer": 30
+      },
+      {
+        "text": "Combine ground chicken, grated onion, garlic, salt, and pepper for the filling."
+      },
+      { "text": "Roll dough thinly; cut into circles with a glass." },
+      {
+        "text": "Place 1 tsp filling in each circle; fold and pinch edges tightly."
+      },
+      {
+        "text": "Boil in salted water until dumplings float and are cooked through.",
+        "timer": 8
+      },
+      { "text": "Drain and toss with melted butter." },
+      { "text": "Serve with sour cream." }
+    ],
+    "nutrition": { "calories": 340, "protein": 22, "carbs": 44, "fat": 8 },
+    "tags": ["dumplings", "traditional", "dinner", "ukrainian", "comfort-food"],
+    "rating": { "value": 4.6, "count": 0 },
+    "imageUrl": "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=600",
+    "cookingTime": 90,
+    "servings": 5,
+    "difficulty": "hard",
+    "createdBy": "u1",
+    "createdAt": "2026-01-10T00:00:00.000Z",
+    "updatedAt": "2026-01-10T00:00:00.000Z"
+  },
+  {
+    "id": "r11",
+    "title": "Lentil Soup",
+    "description": "A hearty, protein-rich red lentil soup spiced with cumin, turmeric, and smoked paprika. Vegan, filling, and ready in 30 minutes — perfect for a weeknight dinner.",
+    "ingredients": [
+      { "name": "red lentils", "amount": 250, "unit": "g" },
+      { "name": "onion", "amount": 1, "unit": "large" },
+      { "name": "carrots", "amount": 2, "unit": "medium" },
+      { "name": "garlic", "amount": 4, "unit": "cloves" },
+      { "name": "canned tomatoes", "amount": 400, "unit": "g" },
+      { "name": "vegetable broth", "amount": 1.5, "unit": "L" },
+      { "name": "cumin", "amount": 1, "unit": "tsp" },
+      { "name": "turmeric", "amount": 0.5, "unit": "tsp" },
+      { "name": "smoked paprika", "amount": 1, "unit": "tsp" },
+      { "name": "olive oil", "amount": 2, "unit": "tbsp" },
+      { "name": "lemon juice", "amount": 2, "unit": "tbsp" },
+      { "name": "fresh parsley", "amount": 1, "unit": "handful" }
+    ],
+    "steps": [
+      {
+        "text": "Dice onion, carrots, and garlic; sauté in olive oil until softened.",
+        "timer": 8
+      },
+      {
+        "text": "Add cumin, turmeric, and paprika; stir 1 minute until fragrant.",
+        "timer": 1
+      },
+      { "text": "Add lentils, canned tomatoes, and broth; bring to a boil." },
+      {
+        "text": "Reduce heat and simmer until lentils are completely soft.",
+        "timer": 20
+      },
+      { "text": "Blend half the soup for a creamy-chunky texture (optional)." },
+      { "text": "Stir in lemon juice; adjust seasoning." },
+      { "text": "Serve topped with fresh parsley." }
+    ],
+    "nutrition": { "calories": 240, "protein": 14, "carbs": 36, "fat": 5 },
+    "tags": ["soup", "vegan", "healthy", "high-protein", "quick", "dinner"],
+    "diet": ["vegan", "vegetarian", "gluten-free"],
+    "rating": { "value": 4.4, "count": 0 },
+    "imageUrl": "https://images.unsplash.com/photo-1547592180-85f173990554?w=600",
+    "cookingTime": 30,
+    "servings": 4,
+    "difficulty": "easy",
+    "createdBy": "u1",
+    "createdAt": "2026-01-11T00:00:00.000Z",
+    "updatedAt": "2026-01-11T00:00:00.000Z"
+  },
+  {
+    "id": "r12",
+    "title": "Shakshuka",
+    "description": "Eggs poached in a spiced tomato-pepper sauce with harissa and feta. A Middle-Eastern brunch staple that's bold, colorful, and on the table in 25 minutes.",
+    "ingredients": [
+      { "name": "eggs", "amount": 5, "unit": "large" },
+      { "name": "canned crushed tomatoes", "amount": 800, "unit": "g" },
+      { "name": "red bell peppers", "amount": 2, "unit": "medium" },
+      { "name": "onion", "amount": 1, "unit": "large" },
+      { "name": "garlic", "amount": 4, "unit": "cloves" },
+      { "name": "harissa paste", "amount": 2, "unit": "tbsp" },
+      { "name": "cumin", "amount": 1, "unit": "tsp" },
+      { "name": "smoked paprika", "amount": 1, "unit": "tsp" },
+      { "name": "feta cheese", "amount": 80, "unit": "g" },
+      { "name": "olive oil", "amount": 2, "unit": "tbsp" },
+      { "name": "fresh cilantro or parsley", "amount": 1, "unit": "handful" },
+      { "name": "crusty bread", "amount": 4, "unit": "slices" }
+    ],
+    "steps": [
+      {
+        "text": "Dice onion and peppers; sauté in olive oil over medium heat.",
+        "timer": 8
+      },
+      {
+        "text": "Add garlic, cumin, paprika, and harissa; cook 1 minute.",
+        "timer": 1
+      },
+      {
+        "text": "Add crushed tomatoes; simmer until sauce thickens.",
+        "timer": 10
+      },
+      {
+        "text": "Make wells in the sauce with a spoon; crack one egg into each well."
+      },
+      {
+        "text": "Cover and cook until whites are set but yolks are still runny.",
+        "timer": 6
+      },
+      { "text": "Crumble feta over the top; scatter fresh herbs." },
+      { "text": "Serve directly from the pan with crusty bread." }
+    ],
+    "nutrition": { "calories": 260, "protein": 14, "carbs": 20, "fat": 14 },
+    "tags": [
+      "breakfast",
+      "brunch",
+      "middle-eastern",
+      "vegetarian",
+      "quick",
+      "eggs"
+    ],
+    "diet": ["vegetarian", "gluten-free"],
+    "rating": { "value": 4.6, "count": 0 },
+    "imageUrl": "https://images.unsplash.com/photo-1529042410759-befb1204b468?w=600",
+    "cookingTime": 25,
+    "servings": 4,
+    "difficulty": "easy",
+    "createdBy": "u1",
+    "createdAt": "2026-01-12T00:00:00.000Z",
+    "updatedAt": "2026-01-12T00:00:00.000Z"
+  }
+]
