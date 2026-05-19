@@ -1,10 +1,12 @@
 import type { ButtonHTMLAttributes } from "react";
-import type { IconName } from "./utils.ts";
 
-export type IconSize = "small" | "medium";
+export type IconButtonVariant = "default" | "circle" | "action";
+export type IconButtonActionType = "edit" | "delete";
 
 export type IconButtonProps = {
-  iconName: IconName;
-  onClick?: () => void;
-  size?: IconSize;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+  iconSrc: string;
+  label: string;
+  variant?: IconButtonVariant;
+  active?: boolean;
+  actionType?: IconButtonActionType;
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children">;

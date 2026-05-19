@@ -23,10 +23,73 @@
   &__icon {
     width: 20px;
     height: 20px;
+    flex-shrink: 0;
+  }
 
-    &--medium {
-      width: 24px;
-      height: 24px;
+  &--circle {
+    background: colors.$color-contrast-high;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    opacity: 0.55;
+    box-shadow: 0 2px 8px colors.$shadow-lg;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      opacity 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: 2px solid colors.$color-secondary-dark;
+      outline-offset: 2px;
+      border-radius: 50%;
+      opacity: 1;
+    }
+
+    .icon-button__icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    &--active {
+      background: colors.$color-dislike-bg;
+      opacity: 1;
+    }
+  }
+
+  &--action {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:focus-visible {
+      outline: 2px solid colors.$color-secondary-dark;
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+
+    .icon-button__icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    &--edit:hover {
+      background-color: rgba(colors.$color-secondary, 0.12);
+    }
+
+    &--delete:hover {
+      background-color: colors.$color-dislike-bg;
     }
   }
 }

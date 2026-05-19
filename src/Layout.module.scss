@@ -1,0 +1,16 @@
+@use "./assets/styles/variables";
+
+.main {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+
+  @media (max-width: variables.$bp-tablet) {
+    padding: 1.5rem 1rem;
+  }
+
+  @media (max-width: variables.$bp-mobile) {
+    padding: 1rem;
+  }
+}

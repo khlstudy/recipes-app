@@ -1,5 +1,6 @@
 import { useState, type ChangeEvent, type SubmitEvent } from "react";
 import IconButton from "../icon-button/IconButton";
+import { HEADER_ICONS } from "../icon-button/utils";
 import type { SearchProps } from "./types";
 import styles from "./Search.module.scss";
 
@@ -29,7 +30,7 @@ const Search = ({
         className={styles["search-input"]}
         autoComplete="off"
       />
-      <IconButton iconName="search" type="submit" />
+      <IconButton iconSrc={HEADER_ICONS.search} label="search" type="submit" />
     </form>
   );
 };

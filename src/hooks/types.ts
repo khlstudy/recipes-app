@@ -47,3 +47,14 @@ export interface UseComparisonResult {
   isInComparison: (_recipeId: string) => boolean;
   isFull: boolean;
 }
+
+export interface ApiState<T> {
+  data: T | null;
+  loading: boolean;
+  error: string | null;
+}
+
+export interface UseApiReturn<T> extends ApiState<T> {
+  execute: (_fetcher: () => Promise<T>) => Promise<T | null>;
+  reset: () => void;
+}

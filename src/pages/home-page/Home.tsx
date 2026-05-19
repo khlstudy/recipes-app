@@ -1,5 +1,109 @@
+import { useState, useEffect } from "react";
+
+import type { Recipe } from "../../types/index";
+import type { UserProfile } from "../../types/index";
+import type { PaginatedResponse, ApiResponse } from "../../api/types";
+
+import { apiClient } from "../../api/client";
+import { ENDPOINTS } from "../../api/endpoints";
+import { useAuthContext } from "../../context/AuthContext";
+import { useApi } from "../../hooks/useApi";
+import { ONBOARDING_STEPS, computeFeed } from "./utils";
+
+import RecipeGrid from "../../components/common/recipe-grid/RecipeGrid";
+import StepList from "../../components/home/step-list/StepList";
+
+import styles from "./Home.module.scss";
+
 const Home = () => {
-  return <div>Hello world</div>;
+  const { currentUser } = useAuthContext();
+
+  const recipesApi = useApi<Recipe[]>();
+  const userApi = useApi<{ userProfile: UserProfile; favoriteIds: string[] }>();
+  const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    recipesApi.execute(() =>
+      apiClient<PaginatedResponse<Recipe>>(ENDPOINTS.RECIPES).then(
+        (res) => res.data
+      )
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!currentUser) return;
+
+    userApi
+      .execute(() =>
+        Promise.all([
+          apiClient<ApiResponse<UserProfile>>(ENDPOINTS.USER(currentUser.id)),
+          apiClient<ApiResponse<Recipe[]>>(
+            ENDPOINTS.USER_FAVORITES(currentUser.id)
+          ),
+        ]).then(([profileRes, favRes]) => ({
+          userProfile: profileRes.data,
+          favoriteIds: favRes.data.map((r) => r.id),
+        }))
+      )
+      .then((result) => {
+        if (result) setFavoriteIds(result.favoriteIds);
+      });
+  }, [currentUser]);
+
+  const handleFavoriteToggle = async (recipeId: string) => {
+    if (!currentUser) return;
+
+    const isFav = favoriteIds.includes(recipeId);
+
+    if (isFav) {
+      await apiClient(ENDPOINTS.USER_FAVORITE(currentUser.id, recipeId), {
+        method: "DELETE",
+      });
+      setFavoriteIds((prev) => prev.filter((id) => id !== recipeId));
+    } else {
+      await apiClient(ENDPOINTS.USER_FAVORITES(currentUser.id), {
+        method: "POST",
+        body: { recipeId },
+      });
+      setFavoriteIds((prev) => [...prev, recipeId]);
+    }
+  };
+
+  const recipes = recipesApi.data ?? [];
+  const userProfile = userApi.data?.userProfile ?? null;
+  const { recommendations, topRecipes } = computeFeed(recipes, userProfile);
+
+  return (
+    <div className={styles.home}>
+      <StepList
+        title="Find Your Next Favorite Recipe"
+        description="Discover personalized recipes based on your taste, dietary needs, and what's in your fridge."
+        steps={[...ONBOARDING_STEPS]}
+      />
+
+      <section className={styles["home__section"]}>
+        <RecipeGrid
+          recipes={recommendations}
+          onRecipeClick={() => {}}
+          onFavoriteToggle={handleFavoriteToggle}
+          favoriteRecipes={favoriteIds}
+          title="Recommended For You"
+          emptyMessage="Start browsing recipes to get personalized recommendations."
+        />
+      </section>
+
+      <section className={styles["home__section"]}>
+        <RecipeGrid
+          recipes={topRecipes}
+          onRecipeClick={() => {}}
+          onFavoriteToggle={handleFavoriteToggle}
+          favoriteRecipes={favoriteIds}
+          title="Top Recipes"
+          emptyMessage="No recipes available yet."
+        />
+      </section>
+    </div>
+  );
 };
 
 export default Home;

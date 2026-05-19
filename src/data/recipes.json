@@ -2,7 +2,7 @@
   {
     "id": "r1",
     "title": "Classic Borscht",
-    "description": "A rich, hearty Eastern European beet soup with a deep ruby color. This traditional recipe combines tender vegetables, a savory broth, and a dollop of sour cream for a warming, satisfying meal.",
+    "description": "A rich, hearty Eastern European beet soup with tender vegetables, savory broth, and a dollop of sour cream.",
     "ingredients": [
       { "name": "beets", "amount": 3, "unit": "medium" },
       { "name": "cabbage", "amount": 300, "unit": "g" },
@@ -60,7 +60,7 @@
   {
     "id": "r2",
     "title": "Spaghetti Carbonara",
-    "description": "An authentic Roman pasta dish made with eggs, Pecorino Romano, guanciale, and black pepper. Creamy without any cream — just the magic of emulsified eggs and pasta water.",
+    "description": "An authentic Roman pasta dish with eggs, Pecorino Romano, and guanciale. Creamy without any cream — pure pasta water magic.",
     "ingredients": [
       { "name": "spaghetti", "amount": 400, "unit": "g" },
       { "name": "guanciale or pancetta", "amount": 150, "unit": "g" },
@@ -108,7 +108,7 @@
   {
     "id": "r3",
     "title": "Greek Salad",
-    "description": "A fresh, vibrant Mediterranean salad with crisp cucumbers, juicy tomatoes, creamy feta, and briny Kalamata olives dressed in olive oil and oregano. Ready in minutes.",
+    "description": "A vibrant Mediterranean salad with crisp cucumbers, juicy tomatoes, creamy feta, and Kalamata olives. Ready in minutes.",
     "ingredients": [
       { "name": "tomatoes", "amount": 4, "unit": "medium" },
       { "name": "cucumber", "amount": 1, "unit": "large" },
@@ -156,7 +156,7 @@
   {
     "id": "r4",
     "title": "Chicken Teriyaki",
-    "description": "Tender chicken thighs glazed in a sweet-savory homemade teriyaki sauce. A Japanese-inspired weeknight favorite that comes together in under 30 minutes.",
+    "description": "Tender chicken thighs glazed in a sweet-savory homemade teriyaki sauce. A Japanese-inspired weeknight dinner in 30 minutes.",
     "ingredients": [
       { "name": "chicken thighs", "amount": 600, "unit": "g" },
       { "name": "soy sauce", "amount": 4, "unit": "tbsp" },
@@ -204,7 +204,7 @@
   {
     "id": "r5",
     "title": "Fluffy Pancakes",
-    "description": "Light-as-air American-style pancakes with a golden crust and pillowy interior. Perfect for a lazy weekend breakfast with maple syrup and fresh berries.",
+    "description": "Light, fluffy American-style pancakes with a golden crust. Perfect for a weekend breakfast with maple syrup and fresh berries.",
     "ingredients": [
       { "name": "all-purpose flour", "amount": 200, "unit": "g" },
       { "name": "milk", "amount": 250, "unit": "ml" },
@@ -252,7 +252,7 @@
   {
     "id": "r6",
     "title": "Keto Avocado Bowl",
-    "description": "A nutrient-dense, low-carb bowl built on creamy avocado with grilled salmon, leafy greens, cucumber, and a lemon-herb dressing. A complete meal that keeps you full for hours.",
+    "description": "A low-carb bowl with creamy avocado, grilled salmon, leafy greens, and a lemon-herb dressing. Filling and ready in 15 minutes.",
     "ingredients": [
       { "name": "avocado", "amount": 2, "unit": "ripe" },
       { "name": "salmon fillet", "amount": 200, "unit": "g" },
@@ -299,7 +299,7 @@
   {
     "id": "r7",
     "title": "Classic Tiramisu",
-    "description": "The iconic Italian dessert with espresso-soaked ladyfingers and a cloud of mascarpone cream dusted with cocoa. No baking required — just patience while it sets overnight.",
+    "description": "Espresso-soaked ladyfingers layered with silky mascarpone cream and dusted with cocoa. No baking — just patience while it chills.",
     "ingredients": [
       { "name": "ladyfinger biscuits", "amount": 200, "unit": "g" },
       { "name": "mascarpone cheese", "amount": 500, "unit": "g" },
@@ -344,7 +344,7 @@
   {
     "id": "r8",
     "title": "Smoothie Bowl",
-    "description": "A thick, vibrant acai-mango smoothie bowl packed with antioxidants and topped with granola, fresh fruit, and seeds. A beautiful, nutritious breakfast that takes 10 minutes.",
+    "description": "A thick acai-mango smoothie bowl packed with antioxidants, topped with granola, fresh fruit, and seeds. Ready in 10 minutes.",
     "ingredients": [
       { "name": "frozen acai puree", "amount": 100, "unit": "g" },
       { "name": "frozen mango", "amount": 150, "unit": "g" },
@@ -382,7 +382,7 @@
   {
     "id": "r9",
     "title": "Beef Burger",
-    "description": "A juicy smash-style beef burger with a crispy sear, melted cheddar, caramelized onions, and all the classic fixings. Better than anything from a fast-food chain.",
+    "description": "A juicy smash-style burger with a crispy sear, melted cheddar, and caramelized onions. Better than anything from a fast-food chain.",
     "ingredients": [
       { "name": "ground beef (80/20)", "amount": 500, "unit": "g" },
       { "name": "burger buns", "amount": 4, "unit": "pcs" },
@@ -433,7 +433,7 @@
   {
     "id": "r10",
     "title": "Chicken Dumplings (Vareniki)",
-    "description": "Homemade Ukrainian dumplings filled with seasoned ground chicken and onion, boiled until tender and served with butter and sour cream. A labor of love worth every minute.",
+    "description": "Homemade Ukrainian dumplings filled with seasoned ground chicken and onion, served with butter and sour cream.",
     "ingredients": [
       { "name": "all-purpose flour", "amount": 400, "unit": "g" },
       { "name": "warm water", "amount": 200, "unit": "ml" },
@@ -479,7 +479,7 @@
   {
     "id": "r11",
     "title": "Lentil Soup",
-    "description": "A hearty, protein-rich red lentil soup spiced with cumin, turmeric, and smoked paprika. Vegan, filling, and ready in 30 minutes — perfect for a weeknight dinner.",
+    "description": "A hearty red lentil soup spiced with cumin, turmeric, and smoked paprika. Vegan, filling, and ready in 30 minutes.",
     "ingredients": [
       { "name": "red lentils", "amount": 250, "unit": "g" },
       { "name": "onion", "amount": 1, "unit": "large" },
@@ -527,7 +527,7 @@
   {
     "id": "r12",
     "title": "Shakshuka",
-    "description": "Eggs poached in a spiced tomato-pepper sauce with harissa and feta. A Middle-Eastern brunch staple that's bold, colorful, and on the table in 25 minutes.",
+    "description": "Eggs poached in a spiced tomato-pepper sauce with harissa and feta. A bold Middle-Eastern brunch on the table in 25 minutes.",
     "ingredients": [
       { "name": "eggs", "amount": 5, "unit": "large" },
       { "name": "canned crushed tomatoes", "amount": 800, "unit": "g" },

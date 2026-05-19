@@ -1,26 +1,32 @@
-import type { IconButtonProps } from "./types.ts";
-import { ICONS } from "./utils.ts";
-import { classNames } from "../../../utils/classNames.ts";
+import type { IconButtonProps } from "./types";
+import { classNames } from "../../../utils/classNames";
+import Icon from "../icon/Icon";
 import styles from "./IconButton.module.scss";
 
 const IconButton = ({
-  iconName,
-  onClick,
-  size = "medium",
+  iconSrc,
+  label,
+  variant = "default",
+  active = false,
+  actionType,
+  className,
   ...restProps
 }: IconButtonProps) => {
-  const iconClassName = classNames(
-    styles["icon-button__icon"],
-    size === "medium" ? styles["icon-button__icon--medium"] : null
+  const buttonClassName = classNames(
+    styles["icon-button"],
+    styles[`icon-button--${variant}`],
+    active ? styles[`icon-button--${variant}--active`] : null,
+    actionType ? styles[`icon-button--action--${actionType}`] : null,
+    className ?? null
   );
 
   return (
     <button
-      className={styles["icon-button"]}
-      onClick={onClick}
+      className={buttonClassName}
       type="button"
+      aria-label={label}
       {...restProps}>
-      <img src={ICONS[iconName]} alt={iconName} className={iconClassName} />
+      <Icon src={iconSrc} className={styles["icon-button__icon"]} />
     </button>
   );
 };

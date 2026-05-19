@@ -5,6 +5,7 @@ import NavLink from "../nav-link/NavLink";
 import Search from "../search/Search";
 import IconButton from "../icon-button/IconButton";
 import Button from "../button/Button";
+import { HEADER_ICONS } from "../icon-button/utils";
 
 import type { NavLinkProps } from "../nav-link/types";
 
@@ -46,7 +47,7 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.header__container}>
         <Link to="/" onClick={handleLogoClick} className={styles.header__logo}>
-          <IconButton iconName="logo" />
+          <IconButton iconSrc={HEADER_ICONS.logo} label="Logo" />
           <span className={styles.header__logoText}>Recipes app</span>
         </Link>
 
