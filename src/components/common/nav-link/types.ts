@@ -3,4 +3,5 @@ export interface NavLinkProps {
   label: string;
   isActive: boolean;
   onClick?: () => void;
+  badge?: number;
 }

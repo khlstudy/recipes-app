@@ -6,6 +6,7 @@ import Search from "../search/Search";
 import IconButton from "../icon-button/IconButton";
 import Button from "../button/Button";
 import { HEADER_ICONS } from "../icon-button/utils";
+import { useComparisonContext } from "../../../context/ComparisonContext";
 
 import type { NavLinkProps } from "../nav-link/types";
 
@@ -15,6 +16,7 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { comparisonList } = useComparisonContext();
 
   const navLinks: NavLinkProps[] = [
     { to: "/", label: "Home", isActive: location.pathname === "/" },
@@ -32,6 +34,7 @@ const Header = () => {
       to: "/recipe-comparison",
       label: "Recipe Comparison",
       isActive: location.pathname === "/recipe-comparison",
+      badge: comparisonList.length || undefined,
     },
   ];
 
@@ -53,13 +56,14 @@ const Header = () => {
 
         <nav
           className={`${styles.header__nav} ${isMenuOpen ? styles["header__nav--open"] : ""}`}>
-          {navLinks.map(({ to, label, isActive }) => (
+          {navLinks.map(({ to, label, isActive, badge }) => (
             <NavLink
               key={to}
               to={to}
               label={label}
               isActive={isActive}
               onClick={handleNavClick}
+              badge={badge}
             />
           ))}
         </nav>

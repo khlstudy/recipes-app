@@ -40,6 +40,26 @@
       }
     }
 
+    &--badged {
+      &::before {
+        content: var(--badge);
+        position: absolute;
+        right: 0;
+        transform: translate(50%, -50%);
+        min-width: 16px;
+        height: 16px;
+        padding: 0 4px;
+        border-radius: 8px;
+        background: colors.$color-primary;
+        color: colors.$color-contrast-high;
+        font-size: 0.625rem;
+        font-weight: variables.$font-bold;
+        line-height: 16px;
+        text-align: center;
+        pointer-events: none;
+      }
+    }
+
     @media (max-width: variables.$bp-tablet) {
       padding: 0.5rem 0.75rem;
       font-size: 0.9rem;

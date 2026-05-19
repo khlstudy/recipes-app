@@ -1,10 +1,13 @@
 import { AuthProvider } from "./context/AuthContext";
+import { ComparisonProvider } from "./context/ComparisonContext";
 import AppRoutes from "./AppRoutes";
 
 function App() {
   return (
     <AuthProvider>
-      <AppRoutes />
+      <ComparisonProvider>
+        <AppRoutes />
+      </ComparisonProvider>
     </AuthProvider>
   );
 }

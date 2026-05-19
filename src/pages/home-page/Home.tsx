@@ -7,6 +7,7 @@ import type { PaginatedResponse, ApiResponse } from "../../api/types";
 import { apiClient } from "../../api/client";
 import { ENDPOINTS } from "../../api/endpoints";
 import { useAuthContext } from "../../context/AuthContext";
+import { useComparisonContext } from "../../context/ComparisonContext";
 import { useApi } from "../../hooks/useApi";
 import { ONBOARDING_STEPS, computeFeed } from "./utils";
 
@@ -17,6 +18,7 @@ import styles from "./Home.module.scss";
 
 const Home = () => {
   const { currentUser } = useAuthContext();
+  const { toggle, comparisonList } = useComparisonContext();
 
   const recipesApi = useApi<Recipe[]>();
   const userApi = useApi<{ userProfile: UserProfile; favoriteIds: string[] }>();
@@ -87,6 +89,8 @@ const Home = () => {
           onRecipeClick={() => {}}
           onFavoriteToggle={handleFavoriteToggle}
           favoriteRecipes={favoriteIds}
+          onCompareToggle={toggle}
+          comparisonRecipes={comparisonList.map((r) => r.id)}
           title="Recommended For You"
           emptyMessage="Start browsing recipes to get personalized recommendations."
         />
@@ -98,6 +102,8 @@ const Home = () => {
           onRecipeClick={() => {}}
           onFavoriteToggle={handleFavoriteToggle}
           favoriteRecipes={favoriteIds}
+          onCompareToggle={toggle}
+          comparisonRecipes={comparisonList.map((r) => r.id)}
           title="Top Recipes"
           emptyMessage="No recipes available yet."
         />
