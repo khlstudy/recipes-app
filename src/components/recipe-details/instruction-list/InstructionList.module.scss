@@ -1,0 +1,206 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+$ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
+$flip-duration: 0.55s;
+
+.instruction-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 38px;
+    top: 32px;
+    bottom: 32px;
+    width: 2px;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(colors.$color-secondary, 0.25) 0 4px,
+      transparent 4px 8px
+    );
+    z-index: 0;
+
+    @media (max-width: variables.$bp-tablet) {
+      left: 30px;
+      top: 26px;
+      bottom: 26px;
+    }
+
+    @media (max-width: variables.$bp-mobile) {
+      left: 24px;
+      top: 22px;
+      bottom: 22px;
+    }
+  }
+
+  &__slot {
+    perspective: 1200px;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__item {
+    position: relative;
+    width: 100%;
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    transform-style: preserve-3d;
+    transition: transform $flip-duration $ease-premium;
+    border-radius: 14px;
+    font-family: inherit;
+
+    &:focus-visible {
+      outline: 2px solid colors.$color-secondary;
+      outline-offset: 3px;
+    }
+
+    &--done {
+      transform: rotateX(180deg);
+    }
+  }
+
+  &__face {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    background: colors.$color-bg-secondary;
+    border: 1px solid transparent;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition:
+      background-color 0.25s $ease-premium,
+      box-shadow 0.25s $ease-premium;
+    min-width: 0;
+
+    .instruction-list__item:hover & {
+      background: colors.$color-contrast-high;
+      box-shadow: 0 4px 16px rgba(colors.$color-text-primary, 0.05);
+    }
+
+    &--back {
+      position: absolute;
+      inset: 0;
+      transform: rotateX(180deg);
+      background: linear-gradient(
+        135deg,
+        rgba(colors.$color-admin, 0.18) 0%,
+        rgba(colors.$color-admin-light, 0.12) 100%
+      );
+      border-color: rgba(colors.$color-admin, 0.45);
+
+      .instruction-list__item:hover & {
+        background: linear-gradient(
+          135deg,
+          rgba(colors.$color-admin, 0.24) 0%,
+          rgba(colors.$color-admin-light, 0.16) 100%
+        );
+      }
+    }
+
+    @media (max-width: variables.$bp-tablet) {
+      padding: 0.75rem 0.875rem;
+      gap: 0.75rem;
+      border-radius: 12px;
+    }
+
+    @media (max-width: variables.$bp-mobile) {
+      padding: 0.625rem 0.75rem;
+      gap: 0.5rem;
+      border-radius: 10px;
+    }
+  }
+
+  &__number {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: colors.$gradient-secondary;
+    color: colors.$color-contrast-high;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: variables.$font-bold;
+    font-size: 0.9375rem;
+    box-shadow: 0 2px 6px rgba(colors.$color-text-primary, 0.08);
+
+    &--done {
+      background: colors.$gradient-admin;
+      color: colors.$color-admin-text;
+    }
+
+    @media (max-width: variables.$bp-tablet) {
+      width: 28px;
+      height: 28px;
+      font-size: 0.8125rem;
+    }
+
+    @media (max-width: variables.$bp-mobile) {
+      width: 24px;
+      height: 24px;
+      font-size: 0.75rem;
+    }
+  }
+
+  &__text {
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+    font-size: 0.9375rem;
+    color: colors.$color-text-primary;
+    line-height: 1.4;
+    font-weight: variables.$font-medium;
+    overflow-wrap: break-word;
+    word-break: break-word;
+
+    .instruction-list__face--back & {
+      color: colors.$color-admin-text;
+    }
+
+    @media (max-width: variables.$bp-tablet) {
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: variables.$bp-mobile) {
+      font-size: 0.7rem;
+      line-height: 1.3;
+    }
+  }
+
+  &__done-pill {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: variables.$font-bold;
+    color: colors.$color-admin-text;
+    background: rgba(colors.$color-admin, 0.22);
+    border: 1px solid rgba(colors.$color-admin, 0.5);
+    padding: 4px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+    @media (max-width: variables.$bp-tablet) {
+      font-size: 0.6875rem;
+      padding: 3px 9px;
+      letter-spacing: 0.03em;
+    }
+
+    @media (max-width: variables.$bp-mobile) {
+      font-size: 0.5625rem;
+      padding: 2px 6px;
+      letter-spacing: 0.02em;
+    }
+  }
+}

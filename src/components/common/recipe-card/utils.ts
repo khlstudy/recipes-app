@@ -15,6 +15,11 @@ export const RECIPE_ICON_IDS = {
   edit: "edit",
   delete: "delete",
   check: "check",
+  salad: "salad",
+  list: "list",
+  chef: "chef",
+  whiteHeart: "white-heart",
+  whiteHeartNeutral: "white-neutral-heart",
 } as const;
 
 export type RecipeIconId =

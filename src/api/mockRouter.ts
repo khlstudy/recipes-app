@@ -15,6 +15,7 @@ const routes: Record<string, Handler> = {
   "PUT /api/recipes/:id": ([id], b) =>
     recipesHandler.update(id, b as Parameters<typeof recipesHandler.update>[1]),
   "DELETE /api/recipes/:id": ([id]) => recipesHandler.remove(id),
+  "GET /api/recipes/:id/comments": ([id]) => recipesHandler.getComments(id),
   "POST /api/recipes/:id/comments": ([id], b) =>
     recipesHandler.addComment(
       id,

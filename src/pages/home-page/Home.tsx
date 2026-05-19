@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 
 import type { Recipe } from "../../types/index";
 import type { UserProfile } from "../../types/index";
@@ -17,6 +18,7 @@ import StepList from "../../components/home/step-list/StepList";
 import styles from "./Home.module.scss";
 
 const Home = () => {
+  const navigate = useNavigate();
   const { currentUser } = useAuthContext();
   const { toggle, comparisonList } = useComparisonContext();
 
@@ -86,7 +88,7 @@ const Home = () => {
       <section className={styles["home__section"]}>
         <RecipeGrid
           recipes={recommendations}
-          onRecipeClick={() => {}}
+          onRecipeClick={(recipe) => navigate(`/recipes/${recipe.id}`)}
           onFavoriteToggle={handleFavoriteToggle}
           favoriteRecipes={favoriteIds}
           onCompareToggle={toggle}
@@ -99,7 +101,7 @@ const Home = () => {
       <section className={styles["home__section"]}>
         <RecipeGrid
           recipes={topRecipes}
-          onRecipeClick={() => {}}
+          onRecipeClick={(recipe) => navigate(`/recipes/${recipe.id}`)}
           onFavoriteToggle={handleFavoriteToggle}
           favoriteRecipes={favoriteIds}
           onCompareToggle={toggle}
