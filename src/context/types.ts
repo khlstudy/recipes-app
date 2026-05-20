@@ -7,3 +7,8 @@ export interface AuthContextValue {
   register: (_name: string, _email: string, _password: string) => Promise<void>;
   logout: () => void;
 }
+
+export interface SearchFocusContextValue {
+  registerSearch: (_focus: (() => void) | null) => void;
+  focusSearch: () => void;
+}

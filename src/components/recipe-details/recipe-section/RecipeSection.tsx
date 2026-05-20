@@ -1,4 +1,4 @@
-import Icon from "../../common/icon/Icon";
+import SectionHeading from "../../common/section-heading/SectionHeading";
 import { classNames } from "../../../utils/classNames";
 import type { RecipeSectionProps } from "./types";
 import styles from "./RecipeSection.module.scss";
@@ -12,16 +12,7 @@ const RecipeSection = ({
 }: RecipeSectionProps) => (
   <section className={classNames(styles["recipe-section"], className)}>
     <header className={styles["recipe-section__header"]}>
-      <h2 className={styles["recipe-section__title"]}>
-        {iconSrc && (
-          <Icon
-            src={iconSrc}
-            size={22}
-            className={styles["recipe-section__icon"]}
-          />
-        )}
-        {title}
-      </h2>
+      <SectionHeading title={title} iconSrc={iconSrc} size="lg" as="h2" />
       {actions && (
         <div className={styles["recipe-section__actions"]}>{actions}</div>
       )}

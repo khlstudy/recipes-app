@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 
 import NavLink from "../nav-link/NavLink";
@@ -7,8 +7,15 @@ import IconButton from "../icon-button/IconButton";
 import Button from "../button/Button";
 import { HEADER_ICONS } from "../icon-button/utils";
 import { useComparisonContext } from "../../../context/ComparisonContext";
+import { useSearchFocusContext } from "../../../context/SearchFocusContext";
+import { useFetch } from "../../../hooks/useFetch";
+import { useRecentSearches } from "../../../hooks/useRecentSearches";
+import { ENDPOINTS } from "../../../api/endpoints";
+import { buildSearchSuggestions, getTrendingSearches } from "./utils";
 
 import type { NavLinkProps } from "../nav-link/types";
+import type { Recipe } from "../../../types";
+import type { PaginatedResponse } from "../../../api/types";
 
 import styles from "./Header.module.scss";
 
@@ -17,6 +24,49 @@ const Header = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { comparisonList } = useComparisonContext();
+  const { registerSearch } = useSearchFocusContext();
+  const { recentSearches, addRecentSearch, clearRecentSearches } =
+    useRecentSearches();
+
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const burgerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    registerSearch(() => {
+      searchInputRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+      searchInputRef.current?.focus();
+    });
+    return () => registerSearch(null);
+  }, [registerSearch]);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (
+        !navRef.current?.contains(target) &&
+        !burgerRef.current?.contains(target)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isMenuOpen]);
+
+  const { data: recipesRes } = useFetch<PaginatedResponse<Recipe>>(
+    ENDPOINTS.RECIPES
+  );
+
+  const recipes = recipesRes?.data ?? [];
+  const searchSuggestions = buildSearchSuggestions(recipes);
+  const trendingSearches = getTrendingSearches(recipes);
 
   const navLinks: NavLinkProps[] = [
     { to: "/", label: "Home", isActive: location.pathname === "/" },
@@ -46,6 +96,17 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
+  const handleSearch = (query: string, type?: string) => {
+    const trimmed = query.trim();
+    if (!trimmed) {
+      navigate("/catalog");
+      return;
+    }
+    const params = new URLSearchParams({ search: trimmed });
+    if (type) params.set("searchType", type);
+    navigate(`/catalog?${params.toString()}`);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.header__container}>
@@ -55,6 +116,7 @@ const Header = () => {
         </Link>
 
         <nav
+          ref={navRef}
           className={`${styles.header__nav} ${isMenuOpen ? styles["header__nav--open"] : ""}`}>
           {navLinks.map(({ to, label, isActive, badge }) => (
             <NavLink
@@ -69,6 +131,7 @@ const Header = () => {
         </nav>
 
         <button
+          ref={burgerRef}
           className={styles.header__burger}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
@@ -79,7 +142,15 @@ const Header = () => {
         </button>
 
         <div className={styles.header__search}>
-          <Search onSearch={() => navigate("/catalog")} />
+          <Search
+            onSearch={handleSearch}
+            onCommitSearch={addRecentSearch}
+            suggestions={searchSuggestions}
+            inputRef={searchInputRef}
+            recentSearches={recentSearches}
+            trendingSearches={trendingSearches}
+            onClearRecent={clearRecentSearches}
+          />
         </div>
 
         <div className={styles.header__profile}>

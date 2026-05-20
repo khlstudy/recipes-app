@@ -1,0 +1,67 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: colors.$color-bg-secondary;
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__box {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid colors.$color-border-primary;
+    border-radius: 6px;
+    transition:
+      background 0.15s ease,
+      border-color 0.15s ease;
+
+    .checkbox-option__input:checked + & {
+      background-color: colors.$color-primary;
+      border-color: colors.$color-primary;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'><path d='M3.5 8.5l3 3 6-6.5' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 12px 12px;
+    }
+
+    .checkbox-option__input:focus-visible + & {
+      outline: 2px solid colors.$color-secondary;
+      outline-offset: 2px;
+    }
+  }
+
+  &__label {
+    flex: 1;
+    font-size: 0.9375rem;
+    color: colors.$color-text-secondary;
+    text-transform: capitalize;
+  }
+
+  &__count {
+    flex-shrink: 0;
+    min-width: 22px;
+    padding: 0.125rem 0.375rem;
+    border-radius: 999px;
+    background: colors.$color-bg-secondary;
+    color: colors.$color-text-muted;
+    font-size: 0.75rem;
+    font-weight: variables.$font-semibold;
+    text-align: center;
+  }
+}

@@ -1,0 +1,86 @@
+@use "../../../../assets/styles/colors";
+@use "../../../../assets/styles/variables";
+
+.search-empty-panel {
+  background: colors.$color-contrast-high;
+  border: 1px solid colors.$color-border-light;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(colors.$color-text-primary, 0.1);
+  padding: 0.5rem;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.375rem 0.5rem 0.25rem;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: variables.$font-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: colors.$color-text-muted;
+  }
+
+  &__clear {
+    border: none;
+    background: none;
+    padding: 0;
+    font-family: variables.$font-family;
+    font-size: 0.75rem;
+    font-weight: variables.$font-semibold;
+    color: colors.$color-secondary;
+    cursor: pointer;
+
+    &:hover {
+      color: colors.$color-secondary-dark;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 0.625rem;
+    border: none;
+    background: none;
+    border-radius: 8px;
+    font-family: variables.$font-family;
+    font-size: 0.875rem;
+    color: colors.$color-text-secondary;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease;
+
+    &:hover {
+      background: colors.$color-bg-secondary;
+      color: colors.$color-primary;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    color: colors.$color-text-muted;
+  }
+
+  &__text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}

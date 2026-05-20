@@ -1,0 +1,47 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+.filter-group {
+  border-bottom: 1px solid colors.$color-neutral-divider;
+  padding: 0.5rem 0;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.75rem 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: variables.$font-family;
+  }
+
+  &__chevron {
+    flex-shrink: 0;
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid colors.$color-text-muted;
+    border-bottom: 2px solid colors.$color-text-muted;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+    margin-right: 4px;
+
+    &--open {
+      transform: rotate(-135deg);
+      margin-right: 0;
+      margin-bottom: -4px;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.25rem 0 0.875rem;
+  }
+}

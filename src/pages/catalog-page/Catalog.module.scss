@@ -1,0 +1,102 @@
+@use "../../assets/styles/colors";
+@use "../../assets/styles/variables";
+
+.catalog {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+
+  @media (max-width: variables.$bp-tablet) {
+    gap: 1.25rem;
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    align-items: start;
+    gap: 1.75rem;
+
+    @media (max-width: variables.$bp-large) {
+      grid-template-columns: 260px 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: variables.$bp-tablet) {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  &__sidebar {
+    @media (max-width: variables.$bp-tablet) {
+      position: fixed;
+      inset: 0;
+      z-index: 110;
+      display: flex;
+      justify-content: flex-start;
+      visibility: hidden;
+      pointer-events: none;
+
+      &--open {
+        visibility: visible;
+        pointer-events: auto;
+      }
+    }
+  }
+
+  &__backdrop {
+    display: none;
+    border: none;
+    cursor: pointer;
+
+    @media (max-width: variables.$bp-tablet) {
+      display: block;
+      position: absolute;
+      inset: 0;
+      background: colors.$overlay-dark;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+
+      .catalog__sidebar--open & {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__panel {
+    @media (max-width: variables.$bp-tablet) {
+      position: relative;
+      z-index: 1;
+      width: min(340px, 86vw);
+      height: 100%;
+      background: colors.$color-contrast-high;
+      overflow-y: auto;
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+
+      .catalog__sidebar--open & {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &__results {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 0;
+
+    @media (max-width: variables.$bp-mobile) {
+      gap: 1rem;
+    }
+  }
+
+  &__state {
+    text-align: center;
+    padding: 3.5rem 1rem;
+    color: colors.$color-text-muted;
+    font-size: 1rem;
+    background: colors.$color-contrast-high;
+    border-radius: 16px;
+  }
+}

@@ -1,0 +1,53 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+.filter-panel {
+  display: flex;
+  flex-direction: column;
+  background: colors.$color-contrast-high;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(colors.$color-text-primary, 0.05);
+  overflow: hidden;
+  height: fit-content;
+
+  @media (max-width: variables.$bp-tablet) {
+    border-radius: 16px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 2px solid colors.$color-primary;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: variables.$font-bold;
+    color: colors.$color-text-primary;
+    letter-spacing: -0.01em;
+  }
+
+  &__reset {
+    border: none;
+    background: none;
+    padding: 0.25rem 0;
+    font-family: variables.$font-family;
+    font-size: 0.875rem;
+    font-weight: variables.$font-semibold;
+    color: colors.$color-primary;
+    cursor: pointer;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: colors.$color-primary-dark;
+    }
+  }
+
+  &__scroll {
+    padding: 0.5rem 1.5rem 1.25rem;
+  }
+}

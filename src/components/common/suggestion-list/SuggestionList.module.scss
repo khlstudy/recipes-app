@@ -1,0 +1,92 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+$row-height: 2.25rem;
+$padding-block: 0.25rem;
+
+.suggestion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  margin: 0;
+  padding: $padding-block;
+  list-style: none;
+  background: colors.$color-contrast-high;
+  border: 1px solid colors.$color-border-light;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(colors.$color-text-primary, 0.1);
+  max-height: calc(#{$row-height} * var(--max-visible) + #{$padding-block} * 2);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: colors.$color-border-primary;
+    border-radius: 999px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: colors.$color-text-disabled;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    height: $row-height;
+    padding: 0 0.625rem;
+    border: none;
+    background: none;
+    border-radius: 8px;
+    font-family: variables.$font-family;
+    font-size: 0.875rem;
+    color: colors.$color-text-secondary;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease;
+
+    &:hover {
+      background: colors.$color-bg-secondary;
+      color: colors.$color-primary;
+    }
+  }
+
+  &__value {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+  }
+
+  &__type {
+    flex-shrink: 0;
+    padding: 0.0625rem 0.4375rem;
+    border-radius: 999px;
+    font-size: 0.6875rem;
+    font-weight: variables.$font-semibold;
+    text-transform: capitalize;
+    background: colors.$color-bg-secondary;
+    color: colors.$color-text-muted;
+
+    &--recipe {
+      background: rgba(colors.$color-primary, 0.1);
+      color: colors.$color-primary-dark;
+    }
+
+    &--ingredient {
+      background: rgba(colors.$color-category, 0.12);
+      color: colors.$color-category-text;
+    }
+
+    &--tag {
+      background: rgba(colors.$color-secondary, 0.12);
+      color: colors.$color-secondary;
+    }
+  }
+}

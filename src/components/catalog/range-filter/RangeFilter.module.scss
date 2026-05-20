@@ -1,0 +1,76 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+.range-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 0.25rem 0.5rem;
+
+  &__value {
+    font-size: 0.9375rem;
+    color: colors.$color-text-secondary;
+
+    strong {
+      color: colors.$color-primary;
+      font-weight: variables.$font-bold;
+      font-size: 1.0625rem;
+    }
+  }
+
+  &__input {
+    --percent: 50%;
+
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(
+      to right,
+      colors.$color-primary 0%,
+      colors.$color-primary var(--percent),
+      colors.$color-bg-overlay var(--percent),
+      colors.$color-bg-overlay 100%
+    );
+    cursor: pointer;
+    outline: none;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: colors.$color-contrast-high;
+      border: 3px solid colors.$color-primary;
+      box-shadow: 0 2px 6px colors.$shadow-primary-md;
+      transition: transform 0.15s ease;
+    }
+
+    &::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: colors.$color-contrast-high;
+      border: 3px solid colors.$color-primary;
+      box-shadow: 0 2px 6px colors.$shadow-primary-md;
+    }
+
+    &:hover::-webkit-slider-thumb,
+    &:active::-webkit-slider-thumb {
+      transform: scale(1.15);
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 3px colors.$shadow-primary;
+    }
+  }
+
+  &__scale {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: colors.$color-text-muted;
+  }
+}

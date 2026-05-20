@@ -40,6 +40,12 @@ export interface UseSearchResult {
   clearQuery: () => void;
 }
 
+export interface UseRecentSearchesResult {
+  recentSearches: string[];
+  addRecentSearch: (_query: string) => void;
+  clearRecentSearches: () => void;
+}
+
 export interface UseComparisonResult {
   comparisonList: Recipe[];
   toggle: (_recipe: Recipe) => void;
