@@ -1,0 +1,25 @@
+@use "../../assets/styles/colors";
+@use "../../assets/styles/variables";
+
+.smart-matcher {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+
+  @media (max-width: variables.$bp-tablet) {
+    gap: 1.25rem;
+  }
+
+  &__results {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  &__state {
+    text-align: center;
+    color: colors.$color-text-muted;
+    font-size: 1.1rem;
+    padding: 3rem;
+  }
+}

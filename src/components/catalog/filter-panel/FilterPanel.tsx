@@ -1,8 +1,8 @@
 import { ICONS_PATH, RECIPE_ICON_IDS } from "../../common/recipe-card/utils";
 import FilterGroup from "../filter-group/FilterGroup";
 import CheckboxOption from "../checkbox-option/CheckboxOption";
-import RangeFilter from "../range-filter/RangeFilter";
-import IngredientFilter from "../ingredient-filter/IngredientFilter";
+import RangeFilter from "../../common/range-filter/RangeFilter";
+import IngredientInput from "../../common/ingredient-input/IngredientInput";
 
 import {
   COOKING_TIME,
@@ -99,7 +99,7 @@ const FilterPanel = ({
         <FilterGroup
           title="Ingredients"
           iconSrc={`${ICONS_PATH}${RECIPE_ICON_IDS.list}`}>
-          <IngredientFilter
+          <IngredientInput
             ingredients={filters.ingredients}
             suggestions={ingredientSuggestions}
             onAdd={(ingredient) =>

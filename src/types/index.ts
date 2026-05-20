@@ -79,9 +79,15 @@ export interface FilterOptions {
   tags?: string[];
 }
 
+export const MATCH_TIERS = ["ready", "almost", "explore"] as const;
+
+export type MatchTier = (typeof MATCH_TIERS)[number];
+
 export interface MatchedRecipe {
   recipe: Recipe;
   matchPercentage: number;
+  coverage: number;
+  tier: MatchTier;
   matchedIngredients: string[];
   missingIngredients: string[];
 }

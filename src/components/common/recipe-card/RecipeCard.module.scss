@@ -83,26 +83,6 @@
     overflow: hidden;
   }
 
-  &__meta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  &__meta-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.8125rem;
-    color: colors.$color-text-secondary;
-  }
-
-  &__meta-icon {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-  }
-
   &__tags {
     display: flex;
     gap: 6px;

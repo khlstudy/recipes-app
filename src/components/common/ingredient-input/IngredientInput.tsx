@@ -1,19 +1,21 @@
-import { useState, type ChangeEvent, type KeyboardEvent } from "react";
+import { useRef, useState, type ChangeEvent, type KeyboardEvent } from "react";
 
-import IconButton from "../../common/icon-button/IconButton";
-import SuggestionList from "../../common/suggestion-list/SuggestionList";
-import { ICONS_PATH, RECIPE_ICON_IDS } from "../../common/recipe-card/utils";
+import IconButton from "../icon-button/IconButton";
+import SuggestionList from "../suggestion-list/SuggestionList";
+import { ICONS_PATH, RECIPE_ICON_IDS } from "../recipe-card/utils";
 import { matchSuggestions } from "./utils";
-import type { IngredientFilterProps } from "./types";
-import styles from "./IngredientFilter.module.scss";
+import type { IngredientInputProps } from "./types";
+import styles from "./IngredientInput.module.scss";
 
-const IngredientFilter = ({
+const IngredientInput = ({
   ingredients,
   suggestions,
   onAdd,
   onRemove,
-}: IngredientFilterProps) => {
+  placeholder = "Add an ingredient",
+}: IngredientInputProps) => {
   const [query, setQuery] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const matches = matchSuggestions(suggestions, ingredients, query);
 
@@ -22,6 +24,7 @@ const IngredientFilter = ({
     if (!value) return;
     onAdd(value);
     setQuery("");
+    inputRef.current?.focus();
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -36,15 +39,16 @@ const IngredientFilter = ({
   };
 
   return (
-    <div className={styles["ingredient-filter"]}>
-      <div className={styles["ingredient-filter__field"]}>
+    <div className={styles["ingredient-input"]}>
+      <div className={styles["ingredient-input__field"]}>
         <input
+          ref={inputRef}
           type="text"
           value={query}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
-          placeholder="Add an ingredient"
-          className={styles["ingredient-filter__input"]}
+          placeholder={placeholder}
+          className={styles["ingredient-input__input"]}
           autoComplete="off"
         />
         <IconButton
@@ -58,16 +62,16 @@ const IngredientFilter = ({
       <SuggestionList suggestions={matches} onSelect={handleAdd} />
 
       {ingredients.length > 0 && (
-        <ul className={styles["ingredient-filter__tags"]}>
+        <ul className={styles["ingredient-input__tags"]}>
           {ingredients.map((ingredient) => (
             <li key={ingredient}>
               <button
                 type="button"
-                className={styles["ingredient-filter__tag"]}
+                className={styles["ingredient-input__tag"]}
                 onClick={() => onRemove(ingredient)}>
                 {ingredient}
                 <span
-                  className={styles["ingredient-filter__tag-remove"]}
+                  className={styles["ingredient-input__tag-remove"]}
                   aria-hidden="true">
                   ×
                 </span>
@@ -80,4 +84,4 @@ const IngredientFilter = ({
   );
 };
 
-export default IngredientFilter;
+export default IngredientInput;

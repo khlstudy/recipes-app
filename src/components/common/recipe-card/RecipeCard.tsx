@@ -1,14 +1,9 @@
 import type { MouseEvent } from "react";
 
 import type { RecipeCardProps } from "./types";
-import {
-  ICONS_PATH,
-  RECIPE_ICON_IDS,
-  DIFFICULTY_ICON,
-  MAX_VISIBLE_TAGS,
-} from "./utils";
+import { ICONS_PATH, RECIPE_ICON_IDS, MAX_VISIBLE_TAGS } from "./utils";
 import IconButton from "../icon-button/IconButton";
-import Icon from "../icon/Icon";
+import RecipeMeta from "../recipe-meta/RecipeMeta";
 
 import styles from "./RecipeCard.module.scss";
 
@@ -98,32 +93,7 @@ const RecipeCard = ({
           {recipe.description}
         </p>
 
-        <div className={styles["recipe-card__meta"]}>
-          <span className={styles["recipe-card__meta-item"]}>
-            <Icon
-              src={`${ICONS_PATH}${RECIPE_ICON_IDS.clock}`}
-              size={16}
-              className={styles["recipe-card__meta-icon"]}
-            />
-            {recipe.cookingTime} min
-          </span>
-          <span className={styles["recipe-card__meta-item"]}>
-            <Icon
-              src={`${ICONS_PATH}${DIFFICULTY_ICON[recipe.difficulty]}`}
-              size={16}
-              className={styles["recipe-card__meta-icon"]}
-            />
-            {recipe.difficulty}
-          </span>
-          <span className={styles["recipe-card__meta-item"]}>
-            <Icon
-              src={`${ICONS_PATH}${RECIPE_ICON_IDS.star}`}
-              size={16}
-              className={styles["recipe-card__meta-icon"]}
-            />
-            {recipe.rating.value.toFixed(1)}
-          </span>
-        </div>
+        <RecipeMeta recipe={recipe} />
 
         {recipe.tags.length > 0 && (
           <div className={styles["recipe-card__tags"]}>

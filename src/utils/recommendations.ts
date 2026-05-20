@@ -3,7 +3,9 @@ import type {
   UserProfile,
   FilterOptions,
   MatchedRecipe,
+  MatchTier,
 } from "../types";
+import { ingredientsMatch } from "./ingredient-normalization";
 
 // --- Data Mining: Jaccard Similarity ---
 // J(A, B) = |A ∩ B| / |A ∪ B|
@@ -162,54 +164,76 @@ export function applyFilters(
   return result;
 }
 
-// --- Ingredient Overlap Scoring ---
-// Overlap coefficient: matched / min(recipe.ingredients, available) avoids
-// penalising large recipes that happen to match well given what you have.
-// Adaptive threshold + MCDM/WSM sort: overlap% ×0.5 + match count ×0.3 + rating ×0.2
+// --- Ingredient Set Matching (two metrics over normalized sets) ---
+// Matching is exact equality of canonical ingredient names — normalization
+// collapses synonyms/plurals so that |A ∩ B| is counted correctly. Substring
+// matching is deliberately avoided ("egg" ≠ "eggplant", "oil" ≠ "olive oil").
+//
+// coverage = matched / recipe.ingredients  → recall-like, shown on the card.
+// matchPercentage = overlap coefficient (Szymkiewicz–Simpson):
+//            matched / min(recipe.ingredients, available) → used for ranking,
+//            avoids penalising large recipes that match well given what's on hand.
+//
+// No filtering threshold: every recipe with at least one shared ingredient is
+// returned, ranked by relevance. Each result is classified into a tier so the
+// UI can group results without making the user tune a cutoff.
+// MCDM/WSM sort: coverage% ×0.5 + match count ×0.3 + rating ×0.2
+
+// "ready" = nothing to buy (|recipe \ available| = 0). "almost" = a short
+// shopping list. "explore" = everything else still worth a look.
+const ALMOST_MAX_MISSING = 3;
+
+function classifyTier(missingCount: number): MatchTier {
+  if (missingCount === 0) return "ready";
+  if (missingCount <= ALMOST_MAX_MISSING) return "almost";
+  return "explore";
+}
+
 export function smartMatchByIngredients(
   recipes: Recipe[],
-  availableIngredients: string[],
-  minMatchPercentage = 50
+  availableIngredients: string[]
 ): MatchedRecipe[] {
-  const normalized = availableIngredients.map((i) => i.toLowerCase().trim());
-
   const matched: MatchedRecipe[] = recipes.map((recipe) => {
     const matchedIngredients: string[] = [];
     const missingIngredients: string[] = [];
 
     recipe.ingredients.forEach((ing) => {
-      const name = ing.name.toLowerCase();
-      const isMatch = normalized.some(
-        (a) => name.includes(a) || a.includes(name)
+      const isMatch = availableIngredients.some((available) =>
+        ingredientsMatch(available, ing.name)
       );
       if (isMatch) matchedIngredients.push(ing.name);
       else missingIngredients.push(ing.name);
     });
 
+    const coverage =
+      recipe.ingredients.length > 0
+        ? (matchedIngredients.length / recipe.ingredients.length) * 100
+        : 0;
+
     // Overlap coefficient: denominator = smaller of the two sets
     const matchPercentage =
       (matchedIngredients.length /
-        Math.min(recipe.ingredients.length, normalized.length)) *
+        Math.min(recipe.ingredients.length, availableIngredients.length)) *
       100;
-    return { recipe, matchPercentage, matchedIngredients, missingIngredients };
+
+    return {
+      recipe,
+      matchPercentage,
+      coverage,
+      tier: classifyTier(missingIngredients.length),
+      matchedIngredients,
+      missingIngredients,
+    };
   });
 
-  // Adaptive threshold: fewer user ingredients → lower absolute match requirement
-  const filtered = matched.filter((m) => {
-    const count = m.matchedIngredients.length;
-    const total = availableIngredients.length;
-    if (count === 0) return false;
-    if (total <= 3)
-      return count >= 1 || m.matchPercentage >= minMatchPercentage;
-    if (total <= 6)
-      return count >= 2 || m.matchPercentage >= minMatchPercentage;
-    return m.matchPercentage >= minMatchPercentage;
-  });
+  // The only exclusion: a recipe must share at least one ingredient with the
+  // pantry, otherwise it is not a match at all.
+  const filtered = matched.filter((m) => m.matchedIngredients.length > 0);
 
   // MCDM/WSM sort
   return filtered.sort((a, b) => {
     const score = (x: MatchedRecipe) =>
-      x.matchPercentage * 0.5 +
+      x.coverage * 0.5 +
       x.matchedIngredients.length * 10 * 0.3 +
       (x.recipe.rating.value / 5) * 100 * 0.2;
     return score(b) - score(a);

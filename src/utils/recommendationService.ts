@@ -7,10 +7,9 @@ import {
 
 export function matchByIngredients(
   recipes: Recipe[],
-  ingredients: string[],
-  minMatchPercentage = 50
+  ingredients: string[]
 ): MatchedRecipe[] {
-  return smartMatchByIngredients(recipes, ingredients, minMatchPercentage);
+  return smartMatchByIngredients(recipes, ingredients);
 }
 
 export function getRecommendations(

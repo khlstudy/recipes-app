@@ -1,0 +1,34 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+.match-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @media (max-width: variables.$bp-tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  @media (max-width: variables.$bp-mobile) {
+    grid-template-columns: 1fr;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__empty {
+    text-align: center;
+    color: colors.$color-text-muted;
+    font-size: 1.1rem;
+    padding: 3rem;
+    background: colors.$color-contrast-high;
+    border-radius: 12px;
+    margin: 0;
+  }
+}
