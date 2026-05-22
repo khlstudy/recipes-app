@@ -26,7 +26,7 @@ const RecipeDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const location = useLocation();
-  const { currentUser } = useAuthContext();
+  const { currentUser, openAuthModal } = useAuthContext();
 
   const handleBack = () => {
     if (location.key === "default") navigate("/");
@@ -52,7 +52,10 @@ const RecipeDetail = () => {
   }, [currentUser]);
 
   const handleFavoriteToggle = async (recipeId: string) => {
-    if (!currentUser) return;
+    if (!currentUser) {
+      openAuthModal();
+      return;
+    }
     const isFav = favoriteIds.includes(recipeId);
 
     if (isFav) {

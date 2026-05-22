@@ -1,0 +1,106 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+
+  @media (max-width: variables.$bp-mobile) {
+    padding: 1rem;
+  }
+
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    background: colors.$overlay-dark;
+    backdrop-filter: blur(4px);
+    animation: modal-fade 0.25s ease;
+  }
+
+  &__dialog {
+    position: relative;
+    width: 100%;
+    max-height: calc(100vh - 3rem);
+    overflow-y: auto;
+    background: colors.$color-contrast-high;
+    border-radius: 20px;
+    box-shadow: 0 24px 60px colors.$shadow-lg;
+    animation: modal-rise 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    &--small {
+      max-width: 380px;
+    }
+
+    &--medium {
+      max-width: 460px;
+    }
+
+    &--large {
+      max-width: 680px;
+    }
+
+    @media (max-width: variables.$bp-mobile) {
+      max-height: calc(100vh - 2rem);
+      border-radius: 16px;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: colors.$color-bg-secondary;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: colors.$color-bg-overlay;
+      transform: rotate(90deg);
+    }
+
+    @media (max-width: variables.$bp-mobile) {
+      top: 0.65rem;
+      right: 0.65rem;
+      width: 28px;
+      height: 28px;
+
+      svg,
+      img {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+}
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

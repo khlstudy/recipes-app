@@ -19,7 +19,7 @@ import styles from "./Home.module.scss";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { currentUser } = useAuthContext();
+  const { currentUser, openAuthModal } = useAuthContext();
   const { toggle, comparisonList } = useComparisonContext();
 
   const recipesApi = useApi<Recipe[]>();
@@ -55,7 +55,10 @@ const Home = () => {
   }, [currentUser]);
 
   const handleFavoriteToggle = async (recipeId: string) => {
-    if (!currentUser) return;
+    if (!currentUser) {
+      openAuthModal();
+      return;
+    }
 
     const isFav = favoriteIds.includes(recipeId);
 
@@ -75,7 +78,10 @@ const Home = () => {
 
   const recipes = recipesApi.data ?? [];
   const userProfile = userApi.data?.userProfile ?? null;
-  const { recommendations, topRecipes } = computeFeed(recipes, userProfile);
+  const { recommendations, isPersonalized, topRecipes } = computeFeed(
+    recipes,
+    userProfile
+  );
 
   return (
     <div className={styles.home}>
@@ -93,8 +99,8 @@ const Home = () => {
           favoriteRecipes={favoriteIds}
           onCompareToggle={toggle}
           comparisonRecipes={comparisonList.map((r) => r.id)}
-          title="Recommended For You"
-          emptyMessage="Start browsing recipes to get personalized recommendations."
+          title={isPersonalized ? "Recommended For You" : "Worth a Try"}
+          emptyMessage="No recipes available yet."
         />
       </section>
 

@@ -7,6 +7,7 @@ import IconButton from "../icon-button/IconButton";
 import Button from "../button/Button";
 import { HEADER_ICONS } from "../icon-button/utils";
 import { useComparisonContext } from "../../../context/ComparisonContext";
+import { useAuthContext } from "../../../context/AuthContext";
 import { useSearchFocusContext } from "../../../context/SearchFocusContext";
 import { useFetch } from "../../../hooks/useFetch";
 import { useRecentSearches } from "../../../hooks/useRecentSearches";
@@ -24,6 +25,7 @@ const Header = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { comparisonList } = useComparisonContext();
+  const { isAuthenticated, openAuthModal } = useAuthContext();
   const { registerSearch } = useSearchFocusContext();
   const { recentSearches, addRecentSearch, clearRecentSearches } =
     useRecentSearches();
@@ -96,6 +98,14 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
+  const handleProfileClick = () => {
+    if (isAuthenticated) {
+      navigate("/profile");
+    } else {
+      openAuthModal();
+    }
+  };
+
   const handleSearch = (query: string, type?: string) => {
     const trimmed = query.trim();
     if (!trimmed) {
@@ -159,8 +169,8 @@ const Header = () => {
             iconPosition="left"
             variant="outline"
             width="100px"
-            onClick={() => navigate("/profile")}>
-            Profile
+            onClick={handleProfileClick}>
+            {isAuthenticated ? "Profile" : "Sign In"}
           </Button>
         </div>
       </div>

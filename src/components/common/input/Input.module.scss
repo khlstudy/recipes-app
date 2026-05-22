@@ -1,0 +1,57 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  &__label {
+    font-size: 0.8rem;
+    font-weight: variables.$font-semibold;
+    color: colors.$color-text-secondary;
+  }
+
+  &__field {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid colors.$color-border-light;
+    border-radius: 10px;
+    background: colors.$color-bg-secondary;
+    font-family: variables.$font-family;
+    font-size: 0.92rem;
+    color: colors.$color-text-primary;
+    transition: all 0.2s ease;
+
+    &::placeholder {
+      color: colors.$input-placeholder;
+    }
+
+    &:hover {
+      border-color: colors.$color-border-primary;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: colors.$color-secondary;
+      background: colors.$color-contrast-high;
+      box-shadow: 0 0 0 3px colors.$shadow-secondary;
+    }
+  }
+
+  &__caption,
+  &__error {
+    min-height: 1.05rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  &__caption {
+    color: colors.$color-text-muted;
+  }
+
+  &__error {
+    color: colors.$color-dislike;
+    font-weight: variables.$font-medium;
+  }
+}

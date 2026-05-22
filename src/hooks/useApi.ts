@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import type { ApiState, UseApiReturn } from "./types";
+import { getErrorMessage } from "./utils";
 
 const INITIAL_STATE = { data: null, loading: false, error: null };
 
@@ -14,8 +15,7 @@ export const useApi = <T>(): UseApiReturn<T> => {
       setState({ data, loading: false, error: null });
       return data;
     } catch (err) {
-      const error = err instanceof Error ? err.message : "Unknown error";
-      setState({ data: null, loading: false, error });
+      setState({ data: null, loading: false, error: getErrorMessage(err) });
       return null;
     }
   };

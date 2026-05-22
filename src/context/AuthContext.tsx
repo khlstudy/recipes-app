@@ -19,7 +19,7 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 function loadStoredUser(): AuthUser | null {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = sessionStorage.getItem(STORAGE_KEY);
     return raw ? (JSON.parse(raw) as AuthUser) : null;
   } catch {
     return null;
@@ -30,13 +30,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(
     loadStoredUser
   );
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const persistUser = useCallback((user: AuthUser | null) => {
     setCurrentUser(user);
     if (user) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(user));
     } else {
-      localStorage.removeItem(STORAGE_KEY);
+      sessionStorage.removeItem(STORAGE_KEY);
     }
   }, []);
 
@@ -66,6 +67,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     persistUser(null);
   }, [persistUser]);
 
+  const openAuthModal = useCallback(() => setIsAuthModalOpen(true), []);
+  const closeAuthModal = useCallback(() => setIsAuthModalOpen(false), []);
+
   return (
     <AuthContext.Provider
       value={{
@@ -74,6 +78,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         login,
         register,
         logout,
+        isAuthModalOpen,
+        openAuthModal,
+        closeAuthModal,
       }}>
       {children}
     </AuthContext.Provider>

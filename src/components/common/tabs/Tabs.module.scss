@@ -1,0 +1,60 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+.tabs {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  background: colors.$color-bg-primary;
+  border-radius: 12px;
+
+  @media (max-width: variables.$bp-tablet) {
+    border-radius: 10px;
+  }
+
+  @media (max-width: variables.$bp-mobile) {
+    padding: 0.25rem;
+    border-radius: 9px;
+  }
+
+  &__tab {
+    padding: 0.65rem 0;
+    border: none;
+    border-radius: 9px;
+    background: transparent;
+    font-family: variables.$font-family;
+    font-size: 0.9rem;
+    font-weight: variables.$font-semibold;
+    color: colors.$color-text-muted;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    @media (max-width: variables.$bp-tablet) {
+      padding: 0.5rem 0;
+      border-radius: 7px;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: variables.$bp-mobile) {
+      padding: 0.45rem 0;
+      font-size: 0.8rem;
+    }
+
+    &:hover {
+      color: colors.$color-text-secondary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid colors.$color-secondary;
+      outline-offset: 2px;
+    }
+
+    &--active {
+      background: colors.$color-contrast-high;
+      color: colors.$color-secondary-dark;
+      box-shadow: 0 4px 12px colors.$shadow-secondary;
+    }
+  }
+}

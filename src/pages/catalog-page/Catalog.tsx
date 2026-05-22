@@ -29,7 +29,7 @@ import styles from "./Catalog.module.scss";
 const Catalog = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { currentUser } = useAuthContext();
+  const { currentUser, openAuthModal } = useAuthContext();
   const { toggle, comparisonList } = useComparisonContext();
   const { focusSearch } = useSearchFocusContext();
 
@@ -59,7 +59,10 @@ const Catalog = () => {
   }, [currentUser]);
 
   const handleFavoriteToggle = async (recipeId: string) => {
-    if (!currentUser) return;
+    if (!currentUser) {
+      openAuthModal();
+      return;
+    }
     const isFav = favoriteIds.includes(recipeId);
 
     if (isFav) {
