@@ -174,7 +174,12 @@ const Header = () => {
           />
         </div>
 
-        <div className={styles.header__profile}>
+        <div
+          className={`${styles.header__profile} ${
+            location.pathname.startsWith("/profile")
+              ? styles["header__profile--active"]
+              : ""
+          }`}>
           <Button
             iconName="profile"
             iconPosition="left"

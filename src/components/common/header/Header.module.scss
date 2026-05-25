@@ -167,6 +167,7 @@
   &__profile {
     flex-shrink: 0;
     order: 4;
+    position: relative;
 
     @media (max-width: variables.$bp-large) {
       order: 3;
@@ -188,6 +189,22 @@
         width: 14px;
         height: 14px;
         margin-right: 4px;
+      }
+    }
+
+    &--active::after {
+      content: "";
+      position: absolute;
+      bottom: -0.25rem;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: colors.$color-primary;
+      border-radius: 2px;
+
+      @media (max-width: variables.$bp-mobile) {
+        height: 2px;
+        bottom: -0.125rem;
       }
     }
   }

@@ -1,0 +1,126 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+.footer {
+  margin-top: auto;
+  background: colors.$color-bg-secondary;
+  border-top: 1px solid colors.$color-border-light;
+  color: colors.$color-text-secondary;
+  font-family: variables.$font-family;
+
+  &__container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 1.5rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 2rem;
+
+    @media (max-width: variables.$bp-tablet) {
+      padding: 2rem 1rem 1.25rem;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &:focus-visible {
+      outline: 2px solid colors.$color-primary;
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+  }
+
+  &__logoText {
+    font-size: 1.05rem;
+    font-weight: variables.$font-bold;
+    color: colors.$color-primary;
+    letter-spacing: 0.01em;
+  }
+
+  &__tagline {
+    margin: 0;
+    max-width: 32rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: colors.$color-text-muted;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  &__heading {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: variables.$font-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: colors.$color-primary;
+  }
+
+  &__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  &__link {
+    font-size: 0.88rem;
+    color: colors.$color-text-secondary;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: colors.$color-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid colors.$color-primary;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+  }
+
+  &__bottom {
+    border-top: 1px solid colors.$color-border-light;
+    padding: 1rem 2rem;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+
+    @media (max-width: variables.$bp-tablet) {
+      padding: 1rem;
+    }
+  }
+
+  &__copy {
+    margin: 0;
+    font-size: 0.78rem;
+    color: colors.$color-text-muted;
+    text-align: center;
+  }
+}
