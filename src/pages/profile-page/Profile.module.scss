@@ -1,0 +1,69 @@
+@use "../../assets/styles/colors";
+@use "../../assets/styles/variables";
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @media (max-width: variables.$bp-mobile) {
+    gap: 1rem;
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 268px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+
+    @media (max-width: variables.$bp-large) {
+      grid-template-columns: 220px 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: variables.$bp-tablet) {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  &__sidebar {
+    align-self: start;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 0;
+    animation: profile-fade 0.35s ease;
+
+    @media (max-width: variables.$bp-mobile) {
+      gap: 1rem;
+    }
+  }
+
+  &__state {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: colors.$color-text-muted;
+
+    @media (max-width: variables.$bp-mobile) {
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@keyframes profile-fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

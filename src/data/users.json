@@ -32,18 +32,6 @@
           "name": "Favorites",
           "recipeIds": ["r2", "r7"],
           "isDefault": true
-        },
-        {
-          "id": "col2",
-          "name": "Want to Try",
-          "recipeIds": [],
-          "isDefault": true
-        },
-        {
-          "id": "col3",
-          "name": "Cooking History",
-          "recipeIds": [],
-          "isDefault": true
         }
       ]
     },
@@ -62,18 +50,6 @@
           "id": "col4",
           "name": "Favorites",
           "recipeIds": ["r1", "r4", "r8"],
-          "isDefault": true
-        },
-        {
-          "id": "col5",
-          "name": "Want to Try",
-          "recipeIds": ["r12", "r11"],
-          "isDefault": true
-        },
-        {
-          "id": "col6",
-          "name": "Cooking History",
-          "recipeIds": [],
           "isDefault": true
         }
       ]

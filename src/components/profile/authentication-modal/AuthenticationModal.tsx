@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState, type SubmitEvent } from "react";
+import { useNavigate } from "react-router";
 
 import type { AuthModalProps, AuthTab } from "./types";
 import { AUTH_TAB } from "./types";
@@ -22,6 +23,7 @@ import Icon from "../../common/icon/Icon";
 import styles from "./AuthenticationModal.module.scss";
 
 const AuthenticationModal = ({ isOpen, onClose }: AuthModalProps) => {
+  const navigate = useNavigate();
   const { login, register } = useAuthContext();
   const submitApi = useApi<void>();
 
@@ -68,7 +70,10 @@ const AuthenticationModal = ({ isOpen, onClose }: AuthModalProps) => {
         : register(values.name.trim(), values.email.trim(), values.password)
     );
 
-    if (result !== null) onClose();
+    if (result !== null) {
+      onClose();
+      navigate("/profile");
+    }
   };
 
   const fields = AUTH_FIELDS[activeTab];

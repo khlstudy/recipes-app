@@ -14,6 +14,8 @@ import { ONBOARDING_STEPS, computeFeed } from "./utils";
 
 import RecipeGrid from "../../components/common/recipe-grid/RecipeGrid";
 import StepList from "../../components/home/step-list/StepList";
+import ConfirmModal from "../../components/common/confirm-modal/ConfirmModal";
+import { useRecipeAdminActions } from "../../hooks/useRecipeAdminActions";
 
 import styles from "./Home.module.scss";
 
@@ -25,6 +27,16 @@ const Home = () => {
   const recipesApi = useApi<Recipe[]>();
   const userApi = useApi<{ userProfile: UserProfile; favoriteIds: string[] }>();
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
+  const [deletedIds, setDeletedIds] = useState<Set<string>>(new Set());
+
+  const isAdmin = currentUser?.role === "admin";
+  const admin = useRecipeAdminActions((id) => {
+    setDeletedIds((prev) => {
+      const next = new Set(prev);
+      next.add(id);
+      return next;
+    });
+  });
 
   useEffect(() => {
     recipesApi.execute(() =>
@@ -76,12 +88,19 @@ const Home = () => {
     }
   };
 
-  const recipes = recipesApi.data ?? [];
+  const recipes = (recipesApi.data ?? []).filter(
+    (recipe) => !deletedIds.has(recipe.id)
+  );
   const userProfile = userApi.data?.userProfile ?? null;
   const { recommendations, isPersonalized, topRecipes } = computeFeed(
     recipes,
     userProfile
   );
+
+  const handleDeleteFromList = (recipeId: string) => {
+    const recipe = recipes.find((r) => r.id === recipeId);
+    if (recipe) admin.handleRequestDelete(recipe);
+  };
 
   return (
     <div className={styles.home}>
@@ -99,6 +118,12 @@ const Home = () => {
           favoriteRecipes={favoriteIds}
           onCompareToggle={toggle}
           comparisonRecipes={comparisonList.map((r) => r.id)}
+          canEdit={isAdmin}
+          onEdit={admin.handleEdit}
+          onDelete={handleDeleteFromList}
+          dislikedIngredients={
+            userProfile?.preferences.dislikedIngredients ?? []
+          }
           title={isPersonalized ? "Recommended For You" : "Worth a Try"}
           emptyMessage="No recipes available yet."
         />
@@ -112,10 +137,28 @@ const Home = () => {
           favoriteRecipes={favoriteIds}
           onCompareToggle={toggle}
           comparisonRecipes={comparisonList.map((r) => r.id)}
+          canEdit={isAdmin}
+          onEdit={admin.handleEdit}
+          onDelete={handleDeleteFromList}
+          dislikedIngredients={
+            userProfile?.preferences.dislikedIngredients ?? []
+          }
           title="Top Recipes"
           emptyMessage="No recipes available yet."
         />
       </section>
+
+      <ConfirmModal
+        isOpen={admin.pendingDeleteRecipe !== null}
+        title="Delete recipe?"
+        description="This will permanently remove the recipe from the catalog. This action cannot be undone."
+        highlight={admin.pendingDeleteRecipe?.title}
+        confirmLabel="Delete"
+        confirmVariant="danger"
+        pending={admin.isDeleting}
+        onConfirm={admin.handleConfirmDelete}
+        onClose={admin.handleCancelDelete}
+      />
     </div>
   );
 };

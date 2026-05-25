@@ -7,6 +7,8 @@ export const BUTTON_VARIANT = {
   SUCCESS: "success",
   DANGER: "danger",
   OUTLINE: "outline",
+  SECONDARY_OUTLINE: "secondary-outline",
+  FIELD: "field",
 } as const;
 
 export const BUTTON_SIZE = {

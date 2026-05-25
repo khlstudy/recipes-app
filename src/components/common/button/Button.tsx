@@ -11,13 +11,15 @@ const Button = ({
   iconName,
   iconPosition = "left",
   children,
+  className,
   ...restProps
 }: ButtonProps) => {
   const buttonClassName = classNames(
     styles.button,
     styles[`button--${variant}`],
     styles[`button--${size}`],
-    textTransform ? styles[`button--${textTransform}`] : null
+    textTransform ? styles[`button--${textTransform}`] : null,
+    className
   );
 
   const iconElement = iconName && (

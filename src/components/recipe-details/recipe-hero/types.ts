@@ -3,7 +3,9 @@ import type { Recipe } from "../../../types";
 export interface RecipeHeroProps {
   recipe: Recipe;
   isFavorite: boolean;
+  isAuthenticated: boolean;
   onFavoriteToggle: (_recipeId: string) => void;
+  onViewFavorites: () => void;
   onBack?: () => void;
 }
 

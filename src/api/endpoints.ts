@@ -15,7 +15,4 @@ export const ENDPOINTS = {
   USER_FAVORITE: (userId: string, recipeId: string) =>
     `/api/users/${userId}/favorites/${recipeId}`,
   USER_HISTORY: (id: string) => `/api/users/${id}/history`,
-  USER_COLLECTIONS: (id: string) => `/api/users/${id}/collections`,
-  USER_COLLECTION: (userId: string, colId: string) =>
-    `/api/users/${userId}/collections/${colId}`,
 } as const;

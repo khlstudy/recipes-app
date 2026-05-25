@@ -27,6 +27,7 @@ const SuggestionList = ({
           <button
             type="button"
             className={styles["suggestion-list__item"]}
+            onMouseDown={(event) => event.preventDefault()}
             onClick={() => onSelect(item.value, item.type)}>
             <span className={styles["suggestion-list__value"]}>
               {item.value}

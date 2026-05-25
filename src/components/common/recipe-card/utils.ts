@@ -21,6 +21,7 @@ export const RECIPE_ICON_IDS = {
   whiteHeart: "white-heart",
   whiteHeartNeutral: "white-neutral-heart",
   add: "add",
+  eye: "eye",
 } as const;
 
 export type RecipeIconId =

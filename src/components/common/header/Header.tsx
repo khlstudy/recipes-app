@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router";
 
 import NavLink from "../nav-link/NavLink";
 import Search from "../search/Search";
@@ -12,6 +12,7 @@ import { useSearchFocusContext } from "../../../context/SearchFocusContext";
 import { useFetch } from "../../../hooks/useFetch";
 import { useRecentSearches } from "../../../hooks/useRecentSearches";
 import { ENDPOINTS } from "../../../api/endpoints";
+import { RECIPES_CHANGED_EVENT } from "../../../api/handlers/recipesHandler";
 import { buildSearchSuggestions, getTrendingSearches } from "./utils";
 
 import type { NavLinkProps } from "../nav-link/types";
@@ -23,6 +24,9 @@ import styles from "./Header.module.scss";
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const currentSearch =
+    location.pathname === "/catalog" ? (searchParams.get("search") ?? "") : "";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { comparisonList } = useComparisonContext();
   const { isAuthenticated, openAuthModal } = useAuthContext();
@@ -62,9 +66,15 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMenuOpen]);
 
-  const { data: recipesRes } = useFetch<PaginatedResponse<Recipe>>(
-    ENDPOINTS.RECIPES
-  );
+  const { data: recipesRes, refetch: refetchRecipes } = useFetch<
+    PaginatedResponse<Recipe>
+  >(ENDPOINTS.RECIPES);
+
+  useEffect(() => {
+    const handle = () => refetchRecipes();
+    window.addEventListener(RECIPES_CHANGED_EVENT, handle);
+    return () => window.removeEventListener(RECIPES_CHANGED_EVENT, handle);
+  }, [refetchRecipes]);
 
   const recipes = recipesRes?.data ?? [];
   const searchSuggestions = buildSearchSuggestions(recipes);
@@ -157,6 +167,7 @@ const Header = () => {
             onCommitSearch={addRecentSearch}
             suggestions={searchSuggestions}
             inputRef={searchInputRef}
+            initialValue={currentSearch}
             recentSearches={recentSearches}
             trendingSearches={trendingSearches}
             onClearRecent={clearRecentSearches}

@@ -47,4 +47,10 @@ export const favoritesHandler = {
     });
     return { data: {}, success: true };
   },
+
+  clear(userId: string): ApiResponse<Record<string, never>> {
+    const col = getFavoritesCollection(userId);
+    usersHandler.updateCollection(userId, col.id, { recipeIds: [] });
+    return { data: {}, success: true };
+  },
 };

@@ -81,6 +81,25 @@ export function calculateRecipeScore(
   return score;
 }
 
+// --- Preference Transparency Helper ---
+// Mirrors the substring match used by the disliked-ingredient penalty in
+// calculateRecipeScore so the UI badge shows exactly the items that triggered
+// the ×0.2 score multiplier. Returns the *recipe* ingredient names (not the
+// preference strings) so the badge is concrete about what the user will see.
+export function findDislikedMatches(
+  recipe: Recipe,
+  dislikedIngredients: string[]
+): string[] {
+  if (!dislikedIngredients.length) return [];
+  const lowered = dislikedIngredients.map((d) => d.toLowerCase());
+  const matches = new Set<string>();
+  recipe.ingredients.forEach((ing) => {
+    const name = ing.name.toLowerCase();
+    if (lowered.some((d) => name.includes(d))) matches.add(ing.name);
+  });
+  return [...matches];
+}
+
 // --- Content-Based Filtering + Top-K Ranking ---
 // Excludes already-favorited recipes; returns top `limit` by score.
 export function getPersonalizedRecommendations(

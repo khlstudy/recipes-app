@@ -1,15 +1,35 @@
+import { classNames } from "../../../utils/classNames";
 import type { InputProps } from "./types";
 
 import styles from "./Input.module.scss";
 
-const Input = ({ name, label, caption, error, ...restProps }: InputProps) => {
+const Input = ({
+  name,
+  label,
+  caption,
+  error,
+  tone = "default",
+  surface = "muted",
+  requiredMark = false,
+  ...restProps
+}: InputProps) => {
   const captionId = `${name}-caption`;
   const hasError = Boolean(error);
 
   return (
-    <div className={styles.input}>
+    <div
+      className={classNames(
+        styles.input,
+        styles[`input--${tone}`],
+        styles[`input--surface-${surface}`]
+      )}>
       <label className={styles.input__label} htmlFor={name}>
         {label}
+        {requiredMark && (
+          <span className={styles.input__required} aria-hidden="true">
+            *
+          </span>
+        )}
       </label>
 
       <input

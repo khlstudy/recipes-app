@@ -10,4 +10,5 @@ export interface RecipeCardProps {
   onEdit?: (_recipe: Recipe) => void;
   onDelete?: (_recipeId: string) => void;
   canEdit?: boolean;
+  dislikedMatches?: string[];
 }

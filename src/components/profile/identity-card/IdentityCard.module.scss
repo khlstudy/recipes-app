@@ -1,0 +1,134 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+.identity-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid colors.$color-border-light;
+  background: colors.$color-bg-secondary;
+
+  @media (max-width: variables.$bp-mobile) {
+    gap: 1rem;
+    padding: 1.1rem;
+    border-radius: 14px;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    @media (max-width: variables.$bp-mobile) {
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+  }
+
+  &__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    background: colors.$gradient-secondary;
+    box-shadow: 0 8px 18px colors.$shadow-secondary-md;
+    font-size: 1.3rem;
+    font-weight: variables.$font-bold;
+    color: colors.$color-contrast-high;
+
+    @media (max-width: variables.$bp-mobile) {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      font-size: 1.1rem;
+    }
+  }
+
+  &__identity {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__logout {
+    flex-shrink: 0;
+    align-self: flex-start;
+
+    @media (max-width: variables.$bp-mobile) {
+      flex: 1 0 100%;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  &__name {
+    font-size: 1.15rem;
+    font-weight: variables.$font-bold;
+    color: colors.$color-text-primary;
+    word-break: break-word;
+
+    @media (max-width: variables.$bp-mobile) {
+      font-size: 1.05rem;
+    }
+  }
+
+  &__role {
+    align-self: flex-start;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: variables.$font-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+
+    &--user {
+      background: colors.$gradient-info-bg;
+      color: colors.$color-secondary-dark;
+    }
+
+    &--admin {
+      background: colors.$gradient-admin;
+      color: colors.$color-admin-text;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  &__error {
+    padding: 0.65rem 0.85rem;
+    border-radius: 9px;
+    background: colors.$color-dislike-bg;
+    color: colors.$color-dislike;
+    font-size: 0.82rem;
+    font-weight: variables.$font-medium;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1.25rem;
+    border-top: 1px solid colors.$color-border-light;
+
+    @media (max-width: variables.$bp-mobile) {
+      padding-top: 1rem;
+
+      button {
+        width: 100%;
+        max-width: none;
+      }
+    }
+  }
+}

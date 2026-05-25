@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 
-import type { Recipe } from "../../types";
+import type { Recipe, UserProfile } from "../../types";
 import type { ApiResponse, PaginatedResponse } from "../../api/types";
 
 import { apiClient } from "../../api/client";
@@ -15,6 +15,8 @@ import FilterPanel from "../../components/catalog/filter-panel/FilterPanel";
 import CatalogToolbar from "../../components/catalog/catalog-toolbar/CatalogToolbar";
 import RecipeGrid from "../../components/common/recipe-grid/RecipeGrid";
 import StepList from "../../components/home/step-list/StepList";
+import ConfirmModal from "../../components/common/confirm-modal/ConfirmModal";
+import { useRecipeAdminActions } from "../../hooks/useRecipeAdminActions";
 import { classNames } from "../../utils/classNames";
 
 import {
@@ -35,6 +37,17 @@ const Catalog = () => {
 
   const recipesApi = useApi<Recipe[]>();
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
+  const [dislikedIngredients, setDislikedIngredients] = useState<string[]>([]);
+  const [deletedIds, setDeletedIds] = useState<Set<string>>(new Set());
+
+  const isAdmin = currentUser?.role === "admin";
+  const admin = useRecipeAdminActions((id) => {
+    setDeletedIds((prev) => {
+      const next = new Set(prev);
+      next.add(id);
+      return next;
+    });
+  });
 
   const [filters, setFilters] = useState<CatalogFilters>(DEFAULT_FILTERS);
   const [sortBy, setSortBy] = useState<SortKey>("rating");
@@ -52,10 +65,17 @@ const Catalog = () => {
   }, []);
 
   useEffect(() => {
-    if (!currentUser) return;
+    if (!currentUser) {
+      setFavoriteIds([]);
+      setDislikedIngredients([]);
+      return;
+    }
     apiClient<ApiResponse<Recipe[]>>(
       ENDPOINTS.USER_FAVORITES(currentUser.id)
     ).then((res) => setFavoriteIds(res.data.map((r) => r.id)));
+    apiClient<ApiResponse<UserProfile>>(ENDPOINTS.USER(currentUser.id)).then(
+      (res) => setDislikedIngredients(res.data.preferences.dislikedIngredients)
+    );
   }, [currentUser]);
 
   const handleFavoriteToggle = async (recipeId: string) => {
@@ -79,7 +99,10 @@ const Catalog = () => {
     }
   };
 
-  const recipes = useMemo(() => recipesApi.data ?? [], [recipesApi.data]);
+  const recipes = useMemo(
+    () => (recipesApi.data ?? []).filter((r) => !deletedIds.has(r.id)),
+    [recipesApi.data, deletedIds]
+  );
   const results = useMemo(
     () => getCatalogResults(recipes, search, filters, sortBy),
     [recipes, search, filters, sortBy]
@@ -143,11 +166,30 @@ const Catalog = () => {
               favoriteRecipes={favoriteIds}
               onCompareToggle={toggle}
               comparisonRecipes={comparisonList.map((r) => r.id)}
+              canEdit={isAdmin}
+              onEdit={admin.handleEdit}
+              onDelete={(recipeId) => {
+                const recipe = recipes.find((r) => r.id === recipeId);
+                if (recipe) admin.handleRequestDelete(recipe);
+              }}
+              dislikedIngredients={dislikedIngredients}
               emptyMessage={emptyMessage}
             />
           )}
         </section>
       </div>
+
+      <ConfirmModal
+        isOpen={admin.pendingDeleteRecipe !== null}
+        title="Delete recipe?"
+        description="This will permanently remove the recipe from the catalog. This action cannot be undone."
+        highlight={admin.pendingDeleteRecipe?.title}
+        confirmLabel="Delete"
+        confirmVariant="danger"
+        pending={admin.isDeleting}
+        onConfirm={admin.handleConfirmDelete}
+        onClose={admin.handleCancelDelete}
+      />
     </div>
   );
 };

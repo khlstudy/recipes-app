@@ -1,5 +1,6 @@
 import type { RecipeGridProps } from "./types";
 import RecipeCard from "../recipe-card/RecipeCard";
+import { findDislikedMatches } from "../../../utils/recommendations";
 import styles from "./RecipeGrid.module.scss";
 
 const RecipeGrid = ({
@@ -14,6 +15,7 @@ const RecipeGrid = ({
   onEdit,
   onDelete,
   canEdit = false,
+  dislikedIngredients = [],
 }: RecipeGridProps) => {
   return (
     <section className={styles["recipe-grid"]}>
@@ -35,6 +37,10 @@ const RecipeGrid = ({
                 onEdit={onEdit}
                 onDelete={onDelete}
                 canEdit={canEdit}
+                dislikedMatches={findDislikedMatches(
+                  recipe,
+                  dislikedIngredients
+                )}
               />
             </li>
           ))}

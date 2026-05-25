@@ -12,4 +12,5 @@ export interface RecipeGridProps {
   onEdit?: (_recipe: Recipe) => void;
   onDelete?: (_recipeId: string) => void;
   canEdit?: boolean;
+  dislikedIngredients?: string[];
 }

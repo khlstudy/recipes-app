@@ -28,6 +28,11 @@ const routes: Record<string, Handler> = {
     authHandler.register(b as Parameters<typeof authHandler.register>[0]),
 
   "GET /api/users/:id": ([id]) => usersHandler.getProfile(id),
+  "PUT /api/users/:id": ([id], b) =>
+    usersHandler.updateProfile(
+      id,
+      b as Parameters<typeof usersHandler.updateProfile>[1]
+    ),
   "PUT /api/users/:id/preferences": ([id], b) =>
     usersHandler.updatePreferences(
       id,
@@ -36,6 +41,7 @@ const routes: Record<string, Handler> = {
   "GET /api/users/:id/favorites": ([id]) => favoritesHandler.getFavorites(id),
   "POST /api/users/:id/favorites": ([id], b) =>
     favoritesHandler.add(id, b as Parameters<typeof favoritesHandler.add>[1]),
+  "DELETE /api/users/:id/favorites": ([id]) => favoritesHandler.clear(id),
   "DELETE /api/users/:id/favorites/:recipeId": ([id, recipeId]) =>
     favoritesHandler.remove(id, recipeId),
   "GET /api/users/:id/history": ([id]) => usersHandler.getHistory(id),
@@ -44,18 +50,7 @@ const routes: Record<string, Handler> = {
       id,
       b as Parameters<typeof usersHandler.addHistory>[1]
     ),
-  "GET /api/users/:id/collections": ([id]) => usersHandler.getCollections(id),
-  "POST /api/users/:id/collections": ([id], b) =>
-    usersHandler.createCollection(
-      id,
-      b as Parameters<typeof usersHandler.createCollection>[1]
-    ),
-  "PUT /api/users/:id/collections/:colId": ([id, colId], b) =>
-    usersHandler.updateCollection(
-      id,
-      colId,
-      b as Parameters<typeof usersHandler.updateCollection>[2]
-    ),
+  "DELETE /api/users/:id/history": ([id]) => usersHandler.clearHistory(id),
 };
 
 // Build a regex + param-name list from a route pattern like "GET /api/users/:id/favorites"

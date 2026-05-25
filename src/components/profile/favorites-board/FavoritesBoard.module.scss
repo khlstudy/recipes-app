@@ -1,0 +1,100 @@
+@use "../../../assets/styles/colors";
+@use "../../../assets/styles/variables";
+
+.favorites-board {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  &__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  &__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__clear {
+    padding: 0.4rem 0.85rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: transparent;
+    font-family: variables.$font-family;
+    font-size: 0.8rem;
+    font-weight: variables.$font-semibold;
+    color: colors.$color-dislike;
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+
+    &:hover {
+      background: colors.$color-dislike-bg;
+      border-color: colors.$color-dislike;
+    }
+
+    &:focus-visible {
+      outline: 2px solid colors.$color-dislike;
+      outline-offset: 2px;
+    }
+  }
+
+  &__tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 0.85rem;
+    border: 1px solid colors.$color-border-light;
+    border-radius: 999px;
+    background: colors.$color-bg-secondary;
+    font-family: variables.$font-family;
+    font-size: 0.85rem;
+    font-weight: variables.$font-medium;
+    color: colors.$color-text-secondary;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: colors.$color-secondary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid colors.$color-secondary;
+      outline-offset: 2px;
+    }
+
+    &--active {
+      background: colors.$gradient-secondary;
+      border-color: transparent;
+      color: colors.$color-contrast-high;
+      box-shadow: 0 6px 14px colors.$shadow-secondary-md;
+
+      svg {
+        filter: brightness(0) invert(1);
+      }
+    }
+  }
+
+  &__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 0.35rem;
+    border-radius: 999px;
+    background: rgba(colors.$color-text-primary, 0.08);
+    font-size: 0.72rem;
+    font-weight: variables.$font-bold;
+
+    .favorites-board__tab--active & {
+      background: rgba(colors.$color-contrast-high, 0.25);
+    }
+  }
+}

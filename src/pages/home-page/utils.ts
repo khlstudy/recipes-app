@@ -9,7 +9,7 @@ export const TOP_RECIPES_LIMIT = 6;
 
 export const ONBOARDING_STEPS = [
   "Browse or search recipes by ingredient, tag, or diet",
-  "Save favorites and build your personal collection",
+  "Save favorites and revisit your viewing history",
   "Use Smart Matcher to cook with what you already have",
 ] as const;
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { classNames } from "../../../utils/classNames";
+import StatusPill from "../../common/status-pill/StatusPill";
 import type { InstructionListProps } from "./types";
 import styles from "./InstructionList.module.scss";
 
@@ -51,9 +52,7 @@ const InstructionList = ({ steps }: InstructionListProps) => {
                 <span className={styles["instruction-list__text"]}>
                   {step.text}
                 </span>
-                <span className={styles["instruction-list__done-pill"]}>
-                  Done
-                </span>
+                <StatusPill tone="done" label="Done" />
               </span>
             </button>
           </li>

@@ -11,7 +11,49 @@ import type {
 import recipesData from "../../data/recipes.json";
 import { applyFilters, searchRecipes } from "../../utils/recommendations";
 
-let store: Recipe[] = recipesData as Recipe[];
+const USER_RECIPES_STORAGE_KEY = "user_recipes_overlay";
+
+const loadUserRecipes = (): Recipe[] => {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = window.localStorage.getItem(USER_RECIPES_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw) as Recipe[];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+};
+
+const persistUserRecipes = (recipes: Recipe[]): void => {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(
+      USER_RECIPES_STORAGE_KEY,
+      JSON.stringify(recipes)
+    );
+  } catch {
+    // storage quota or disabled — silently ignore in mock layer
+  }
+};
+
+export const RECIPES_CHANGED_EVENT = "recipes:changed";
+
+const notifyRecipesChanged = (): void => {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent(RECIPES_CHANGED_EVENT));
+};
+
+const baseStore = recipesData as Recipe[];
+let userRecipes: Recipe[] = loadUserRecipes();
+let store: Recipe[] = [...userRecipes, ...baseStore];
+
+const syncUserRecipes = (next: Recipe[]): void => {
+  userRecipes = next;
+  store = [...userRecipes, ...baseStore];
+  persistUserRecipes(userRecipes);
+  notifyRecipesChanged();
+};
 
 // Comments are stored separately so Recipe stays a pure data record
 const commentsStore: Record<string, Comment[]> = {};
@@ -94,17 +136,28 @@ export const recipesHandler = {
   create(body: CreateRecipeRequest): ApiResponse<Recipe> {
     const recipe: Recipe = {
       ...body,
-      id: `r${Date.now()}`,
+      id: `user-${Date.now()}`,
       rating: { value: 0, count: 0 },
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       createdBy: "u1",
     };
-    store = [recipe, ...store];
+    syncUserRecipes([recipe, ...userRecipes]);
     return { data: recipe, success: true };
   },
 
   update(id: string, body: UpdateRecipeRequest): ApiResponse<Recipe> {
+    const userIdx = userRecipes.findIndex((r) => r.id === id);
+    if (userIdx !== -1) {
+      const next = [...userRecipes];
+      next[userIdx] = {
+        ...next[userIdx],
+        ...body,
+        updatedAt: new Date().toISOString(),
+      };
+      syncUserRecipes(next);
+      return { data: next[userIdx], success: true };
+    }
     const idx = store.findIndex((r) => r.id === id);
     if (idx === -1)
       throw {
@@ -129,7 +182,11 @@ export const recipesHandler = {
         code: "NOT_FOUND",
         statusCode: 404,
       };
-    store = store.filter((r) => r.id !== id);
+    if (userRecipes.find((r) => r.id === id)) {
+      syncUserRecipes(userRecipes.filter((r) => r.id !== id));
+    } else {
+      store = store.filter((r) => r.id !== id);
+    }
     return { data: { id }, success: true };
   },
 
@@ -158,11 +215,19 @@ export const recipesHandler = {
 
     const avg =
       comments.reduce((sum, c) => sum + c.rating, 0) / comments.length;
-    const idx = store.findIndex((r) => r.id === id);
-    store[idx] = {
-      ...store[idx],
-      rating: { value: Math.round(avg * 10) / 10, count: comments.length },
+    const nextRating = {
+      value: Math.round(avg * 10) / 10,
+      count: comments.length,
     };
+    const userIdx = userRecipes.findIndex((r) => r.id === id);
+    if (userIdx !== -1) {
+      const next = [...userRecipes];
+      next[userIdx] = { ...next[userIdx], rating: nextRating };
+      syncUserRecipes(next);
+    } else {
+      const idx = store.findIndex((r) => r.id === id);
+      store[idx] = { ...store[idx], rating: nextRating };
+    }
 
     return { data: comment, success: true };
   },

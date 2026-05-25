@@ -208,8 +208,28 @@ $ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: variables.$font-semibold;
   }
 
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+
+    @media (max-width: variables.$bp-mobile) {
+      gap: 0.5rem;
+    }
+  }
+
   &__fav-icon {
     margin-right: 8px;
+  }
+
+  &__view-fav {
+    &:hover,
+    &:focus-visible {
+      svg {
+        filter: brightness(0) invert(1);
+      }
+    }
   }
 
   &__tags {
@@ -227,21 +247,29 @@ $ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
     gap: 2px;
     padding: 6px 14px;
     border-radius: 999px;
+    font-family: inherit;
     font-size: 0.8125rem;
     font-weight: variables.$font-medium;
     color: colors.$color-secondary;
     background: transparent;
     border: 1.5px solid rgba(colors.$color-secondary, 0.35);
+    cursor: pointer;
     transition:
       background-color 0.2s $ease-premium,
       color 0.2s $ease-premium,
-      border-color 0.2s $ease-premium;
-    cursor: default;
+      border-color 0.2s $ease-premium,
+      transform 0.2s $ease-premium;
 
     &:hover {
       background: colors.$color-secondary;
       color: colors.$color-contrast-high;
       border-color: colors.$color-secondary;
+      transform: translateY(-1px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid colors.$color-secondary;
+      outline-offset: 2px;
     }
   }
 

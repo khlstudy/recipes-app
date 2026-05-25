@@ -3,6 +3,7 @@ import {
   useContext,
   useState,
   useCallback,
+  useRef,
   type ReactNode,
 } from "react";
 
@@ -19,7 +20,7 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 function loadStoredUser(): AuthUser | null {
   try {
-    const raw = sessionStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? (JSON.parse(raw) as AuthUser) : null;
   } catch {
     return null;
@@ -32,12 +33,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
+  // Set on an intentional logout so ProtectedRoute can redirect without
+  // re-opening the auth modal. Read-once: cleared by consumeJustLoggedOut.
+  const justLoggedOutRef = useRef(false);
+
   const persistUser = useCallback((user: AuthUser | null) => {
     setCurrentUser(user);
     if (user) {
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
     } else {
-      sessionStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(STORAGE_KEY);
     }
   }, []);
 
@@ -64,8 +69,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 
   const logout = useCallback(() => {
+    justLoggedOutRef.current = true;
     persistUser(null);
   }, [persistUser]);
+
+  const consumeJustLoggedOut = useCallback((): boolean => {
+    const value = justLoggedOutRef.current;
+    justLoggedOutRef.current = false;
+    return value;
+  }, []);
+
+  const updateCurrentUser = useCallback(
+    (changes: Partial<Pick<AuthUser, "name" | "email">>) => {
+      setCurrentUser((prev) => {
+        if (!prev) return prev;
+        const next = { ...prev, ...changes };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+        return next;
+      });
+    },
+    []
+  );
 
   const openAuthModal = useCallback(() => setIsAuthModalOpen(true), []);
   const closeAuthModal = useCallback(() => setIsAuthModalOpen(false), []);
@@ -78,6 +102,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         login,
         register,
         logout,
+        consumeJustLoggedOut,
+        updateCurrentUser,
         isAuthModalOpen,
         openAuthModal,
         closeAuthModal,

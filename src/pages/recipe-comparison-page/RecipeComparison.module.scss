@@ -2,16 +2,16 @@
 @use "../../assets/styles/variables";
 
 .recipe-comparison-page {
-  padding: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
 
   @media (max-width: variables.$bp-tablet) {
-    padding: 1.5rem 1rem;
+    gap: 1.25rem;
   }
 
   &__header {
-    margin-bottom: 2rem;
+    margin: 0;
   }
 
   &__title {

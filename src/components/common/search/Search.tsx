@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type SubmitEvent } from "react";
+import { useEffect, useState, type ChangeEvent, type SubmitEvent } from "react";
 
 import IconButton from "../icon-button/IconButton";
 import SuggestionList from "../suggestion-list/SuggestionList";
@@ -21,6 +21,10 @@ const Search = ({
 }: SearchProps) => {
   const [query, setQuery] = useState(initialValue);
   const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    setQuery(initialValue);
+  }, [initialValue]);
 
   const matches = matchSuggestions(suggestions, query);
   const hasQuery = query.trim().length > 0;

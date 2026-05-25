@@ -45,11 +45,25 @@ const RecipeDetail = () => {
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
 
   useEffect(() => {
-    if (!currentUser) return;
+    if (!currentUser) {
+      setFavoriteIds([]);
+      return;
+    }
     apiClient<ApiResponse<Recipe[]>>(
       ENDPOINTS.USER_FAVORITES(currentUser.id)
-    ).then((res) => setFavoriteIds(res.data.map((r) => r.id)));
+    ).then((res) => setFavoriteIds(res.data.map((recipe) => recipe.id)));
   }, [currentUser]);
+
+  const viewedRecipeId = recipeRes?.data?.id;
+  useEffect(() => {
+    if (!currentUser || !viewedRecipeId) return;
+    apiClient(ENDPOINTS.USER_HISTORY(currentUser.id), {
+      method: "POST",
+      body: { recipeId: viewedRecipeId },
+    }).catch(() => {
+      // history is best-effort — don't disrupt the page if it fails
+    });
+  }, [currentUser, viewedRecipeId]);
 
   const handleFavoriteToggle = async (recipeId: string) => {
     if (!currentUser) {
@@ -62,7 +76,7 @@ const RecipeDetail = () => {
       await apiClient(ENDPOINTS.USER_FAVORITE(currentUser.id, recipeId), {
         method: "DELETE",
       });
-      setFavoriteIds((prev) => prev.filter((rid) => rid !== recipeId));
+      setFavoriteIds((prev) => prev.filter((id) => id !== recipeId));
     } else {
       await apiClient(ENDPOINTS.USER_FAVORITES(currentUser.id), {
         method: "POST",
@@ -90,7 +104,9 @@ const RecipeDetail = () => {
       <RecipeHero
         recipe={recipe}
         isFavorite={isFavorite}
+        isAuthenticated={!!currentUser}
         onFavoriteToggle={handleFavoriteToggle}
+        onViewFavorites={() => navigate("/profile/favorites")}
         onBack={handleBack}
       />
 

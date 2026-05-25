@@ -42,10 +42,10 @@
   }
 
   &--small {
-    padding: 8px 0;
+    padding: 8px 1.1rem;
 
     @media (max-width: variables.$bp-mobile) {
-      padding: 6px 0.5rem;
+      padding: 8px 0.85rem;
     }
   }
 
@@ -150,6 +150,65 @@
 
     &:active:not(:disabled) {
       background-color: colors.$color-neutral-divider;
+    }
+
+    &:disabled {
+      color: colors.$color-text-disabled;
+      border-color: colors.$color-border-muted;
+      cursor: not-allowed;
+    }
+  }
+
+  &--field {
+    padding: 0.8rem 1rem;
+    border: 1px solid colors.$color-border-light;
+    border-radius: 10px;
+    background: colors.$color-contrast-high;
+    font-family: variables.$font-family;
+    font-size: 0.92rem;
+    font-weight: variables.$font-medium;
+    color: colors.$color-text-primary;
+
+    &:hover:not(:disabled) {
+      border-color: colors.$color-border-primary;
+    }
+
+    &:focus-visible {
+      outline: none;
+      border-color: colors.$color-secondary;
+      box-shadow: 0 0 0 3px colors.$shadow-secondary;
+    }
+
+    &[aria-pressed="true"] {
+      border-color: colors.$color-secondary;
+      background: colors.$color-secondary;
+      color: colors.$color-contrast-high;
+      box-shadow: 0 0 0 3px colors.$shadow-secondary;
+    }
+
+    &:disabled {
+      color: colors.$color-text-disabled;
+      border-color: colors.$color-border-muted;
+      cursor: not-allowed;
+    }
+  }
+
+  &--secondary-outline {
+    font-weight: variables.$font-semibold;
+    color: colors.$color-secondary;
+    background-color: transparent;
+    border: 1.5px solid colors.$color-secondary;
+
+    &:hover:not(:disabled),
+    &:focus-visible {
+      background-color: colors.$color-secondary;
+      color: colors.$color-contrast-high;
+      border-color: colors.$color-secondary;
+    }
+
+    &:active:not(:disabled) {
+      background-color: colors.$color-secondary-dark;
+      border-color: colors.$color-secondary-dark;
     }
 
     &:disabled {

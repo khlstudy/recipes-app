@@ -7,6 +7,8 @@ import RecipeMeta from "../recipe-meta/RecipeMeta";
 
 import styles from "./RecipeCard.module.scss";
 
+const DISLIKED_VISIBLE = 2;
+
 const RecipeCard = ({
   recipe,
   onClick,
@@ -17,7 +19,13 @@ const RecipeCard = ({
   onEdit,
   onDelete,
   canEdit = false,
+  dislikedMatches = [],
 }: RecipeCardProps) => {
+  const dislikedVisible = dislikedMatches.slice(0, DISLIKED_VISIBLE);
+  const dislikedExtra = dislikedMatches.length - dislikedVisible.length;
+  const dislikedLabel = dislikedMatches.length
+    ? `Contains ingredients you marked as unwanted: ${dislikedMatches.join(", ")}`
+    : undefined;
   const handleFavorite = (e: MouseEvent) => {
     e.stopPropagation();
     onFavoriteToggle?.(recipe.id);
@@ -47,6 +55,21 @@ const RecipeCard = ({
           className={styles["recipe-card__image"]}
         />
 
+        {dislikedMatches.length > 0 && (
+          <span
+            className={styles["recipe-card__warning"]}
+            title={dislikedLabel}
+            aria-label={dislikedLabel}>
+            <span className={styles["recipe-card__warning-icon"]} aria-hidden>
+              !
+            </span>
+            <span className={styles["recipe-card__warning-text"]}>
+              {dislikedVisible.join(", ")}
+              {dislikedExtra > 0 && ` +${dislikedExtra}`}
+            </span>
+          </span>
+        )}
+
         <div className={styles["recipe-card__overlay-actions"]}>
           <IconButton
             variant="circle"
@@ -62,31 +85,28 @@ const RecipeCard = ({
             label="compare"
             onClick={handleCompare}
           />
+          {canEdit && (
+            <>
+              <IconButton
+                variant="circle"
+                iconSrc={`${ICONS_PATH}${RECIPE_ICON_IDS.edit}`}
+                label={`Edit ${recipe.title}`}
+                onClick={handleEdit}
+              />
+              <IconButton
+                variant="circle"
+                iconSrc={`${ICONS_PATH}${RECIPE_ICON_IDS.delete}`}
+                label={`Delete ${recipe.title}`}
+                onClick={handleDelete}
+              />
+            </>
+          )}
         </div>
       </div>
 
       <div className={styles["recipe-card__content"]}>
         <div className={styles["recipe-card__header"]}>
           <h3 className={styles["recipe-card__title"]}>{recipe.title}</h3>
-
-          {canEdit && (
-            <div className={styles["recipe-card__actions"]}>
-              <IconButton
-                variant="action"
-                actionType="edit"
-                iconSrc={`${ICONS_PATH}${RECIPE_ICON_IDS.edit}`}
-                label="edit"
-                onClick={handleEdit}
-              />
-              <IconButton
-                variant="action"
-                actionType="delete"
-                iconSrc={`${ICONS_PATH}${RECIPE_ICON_IDS.delete}`}
-                label="delete"
-                onClick={handleDelete}
-              />
-            </div>
-          )}
         </div>
 
         <p className={styles["recipe-card__description"]}>

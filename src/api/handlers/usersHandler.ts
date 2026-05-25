@@ -2,13 +2,48 @@ import type { UserProfile, Collection } from "../../types";
 import type {
   ApiResponse,
   UpdatePreferencesRequest,
-  CreateCollectionRequest,
+  UpdateProfileRequest,
   UpdateCollectionRequest,
 } from "../types";
 
 import usersData from "../../data/users.json";
 
-let profiles: UserProfile[] = usersData.profiles as UserProfile[];
+const PROFILES_STORAGE_KEY = "user_profiles_overlay";
+
+const seedProfiles = usersData.profiles as UserProfile[];
+
+const loadProfiles = (): UserProfile[] => {
+  if (typeof window === "undefined") return [...seedProfiles];
+  try {
+    const raw = window.localStorage.getItem(PROFILES_STORAGE_KEY);
+    if (!raw) return [...seedProfiles];
+    const overlay = JSON.parse(raw) as UserProfile[];
+    if (!Array.isArray(overlay)) return [...seedProfiles];
+    const overlayById = new Map(overlay.map((p) => [p.id, p]));
+    const merged = seedProfiles.map((seed) => overlayById.get(seed.id) ?? seed);
+    const seedIds = new Set(seedProfiles.map((p) => p.id));
+    const extra = overlay.filter((p) => !seedIds.has(p.id));
+    return [...merged, ...extra];
+  } catch {
+    return [...seedProfiles];
+  }
+};
+
+const persistProfiles = (next: UserProfile[]): void => {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(PROFILES_STORAGE_KEY, JSON.stringify(next));
+  } catch {
+    // storage quota or disabled — silently ignore in mock layer
+  }
+};
+
+let profiles: UserProfile[] = loadProfiles();
+
+const commit = (next: UserProfile[]): void => {
+  profiles = next;
+  persistProfiles(profiles);
+};
 
 function findProfile(id: string): UserProfile {
   const profile = profiles.find((p) => p.id === id);
@@ -39,20 +74,44 @@ export const usersHandler = {
     return { data: findProfile(id), success: true };
   },
 
+  updateProfile(
+    id: string,
+    body: UpdateProfileRequest
+  ): ApiResponse<UserProfile> {
+    const idx = findProfileIdx(id);
+    const patch: UpdateProfileRequest = {};
+    if (body.name?.trim()) patch.name = body.name.trim();
+    if (body.email?.trim()) patch.email = body.email.trim();
+    const next = [...profiles];
+    next[idx] = { ...next[idx], ...patch };
+    commit(next);
+    return { data: next[idx], success: true };
+  },
+
   updatePreferences(
     id: string,
     body: UpdatePreferencesRequest
   ): ApiResponse<UserProfile> {
     const idx = findProfileIdx(id);
-    profiles[idx] = {
-      ...profiles[idx],
-      preferences: { ...profiles[idx].preferences, ...body },
+    const next = [...profiles];
+    next[idx] = {
+      ...next[idx],
+      preferences: { ...next[idx].preferences, ...body },
     };
-    return { data: profiles[idx], success: true };
+    commit(next);
+    return { data: next[idx], success: true };
   },
 
   getHistory(id: string): ApiResponse<string[]> {
     return { data: findProfile(id).viewHistory, success: true };
+  },
+
+  clearHistory(id: string): ApiResponse<Record<string, never>> {
+    const idx = findProfileIdx(id);
+    const next = [...profiles];
+    next[idx] = { ...next[idx], viewHistory: [] };
+    commit(next);
+    return { data: {}, success: true };
   },
 
   addHistory(
@@ -63,33 +122,17 @@ export const usersHandler = {
     const history = profiles[idx].viewHistory.filter(
       (rid) => rid !== body.recipeId
     );
-    profiles[idx] = {
-      ...profiles[idx],
+    const next = [...profiles];
+    next[idx] = {
+      ...next[idx],
       viewHistory: [body.recipeId, ...history],
     };
+    commit(next);
     return { data: { recipeId: body.recipeId }, success: true };
   },
 
   getCollections(id: string): ApiResponse<Collection[]> {
     return { data: findProfile(id).collections, success: true };
-  },
-
-  createCollection(
-    id: string,
-    body: CreateCollectionRequest
-  ): ApiResponse<Collection> {
-    const idx = findProfileIdx(id);
-    const collection: Collection = {
-      id: `col${Date.now()}`,
-      name: body.name,
-      recipeIds: [],
-      isDefault: false,
-    };
-    profiles[idx] = {
-      ...profiles[idx],
-      collections: [...profiles[idx].collections, collection],
-    };
-    return { data: collection, success: true };
   },
 
   updateCollection(
@@ -111,7 +154,9 @@ export const usersHandler = {
     const updated = { ...profiles[profileIdx].collections[colIdx], ...body };
     const collections = [...profiles[profileIdx].collections];
     collections[colIdx] = updated;
-    profiles[profileIdx] = { ...profiles[profileIdx], collections };
+    const next = [...profiles];
+    next[profileIdx] = { ...next[profileIdx], collections };
+    commit(next);
     return { data: updated, success: true };
   },
 
@@ -133,20 +178,8 @@ export const usersHandler = {
           recipeIds: [],
           isDefault: true,
         },
-        {
-          id: `col_${id}_wtt`,
-          name: "Want to Try",
-          recipeIds: [],
-          isDefault: true,
-        },
-        {
-          id: `col_${id}_hist`,
-          name: "Cooking History",
-          recipeIds: [],
-          isDefault: true,
-        },
       ],
     };
-    profiles = [...profiles, newProfile];
+    commit([...profiles, newProfile]);
   },
 };

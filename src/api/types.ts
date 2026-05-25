@@ -66,8 +66,9 @@ export interface UpdatePreferencesRequest {
   dislikedIngredients?: string[];
 }
 
-export interface CreateCollectionRequest {
-  name: string;
+export interface UpdateProfileRequest {
+  name?: string;
+  email?: string;
 }
 
 export interface UpdateCollectionRequest {
